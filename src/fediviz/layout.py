@@ -33,7 +33,6 @@ class Layout:
     def setup_hero(self):
         """Sets up app hero"""
         st.title("FediViz")
-        # TODO: GitHub Link
 
     def setup_body(self):
         """Sets up app body"""
