@@ -24,7 +24,7 @@ class Layout:
         self.setup_hero()
         Uploads.show()
         if Uploads.has_file():
-            st.snow()
+            st.balloons()
             self.setup_body()
 
         with bottom():
