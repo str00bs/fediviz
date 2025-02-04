@@ -6,28 +6,28 @@ from streamlit_extras.app_logo import add_logo
 from streamlit_extras.bottom_container import bottom
 
 from utils import Uploads
-from components.outbox import Outbox
+from components import Actor, Bookmarks, Likes, Outbox
 from config import Config
 
 
 class Layout:
     """Manages application layout"""
 
-    uploads_container: object
+    tab_labels: Sequence[str] = ["Actor", "Bookmarks", "Likes", "Outbox"]
+    tabs: dict = {}
 
     def __init__(self):
         st.set_page_config(
-            layout="wide",
+            # layout="wide",
             page_title="FediViz",
             page_icon=Config.FAVICON
         )
-
-        if not Uploads.has_file():
-            Uploads.show()
+        self.setup_hero()
+        # if not Uploads.has_file():
+        Uploads.show()
 
         if Uploads.has_file():
-            with st.container():
-                Outbox()
+            self.setup_body()
 
         with bottom():
             self.setup_footer()
@@ -38,10 +38,22 @@ class Layout:
         st.logo(Config.FAVICON, size="large")
         # TODO: GitHub Link
 
-    def setup_nav(self):
-        """Sets up app nav"""
-        # ? Sidebar, tabs or tab-bar?
-        raise NotImplementedError
+    def setup_body(self):
+        """Sets up app body"""
+        with st.container():
+            self.setup_tabs()
+            with self.tabs["Actor"]:
+                Actor()
+            with self.tabs["Bookmarks"]:
+                Bookmarks()
+            with self.tabs["Likes"]:
+                Likes()
+            with self.tabs["Outbox"]:
+                Outbox()
+
+    def setup_tabs(self):
+        """Sets up app tabs"""
+        self.tabs = dict(zip(self.tab_labels, st.tabs(self.tab_labels)))
 
     def setup_footer(self):
         """Sets up app footer"""

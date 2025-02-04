@@ -13,4 +13,4 @@ class Actor:
     """This class loads, transforms and displays Actor data"""
 
     def __init__(self):
-        raise NotImplementedError
+        st.text("NotImplemented")

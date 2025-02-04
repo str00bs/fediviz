@@ -195,3 +195,4 @@ src/.env
 docker-compose.yml
 src/fediviz/static/uploads/**/
 config.toml
+test_data/
