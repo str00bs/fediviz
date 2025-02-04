@@ -193,4 +193,5 @@ Thumbs.db
 src/.env
 .env
 docker-compose.yml
-data/
+src/fediviz/static/uploads/**/
+config.toml
