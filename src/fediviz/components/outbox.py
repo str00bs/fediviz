@@ -6,9 +6,12 @@ File contains Likes class, used for:
 
 likes data from the users upload.
 """
+import json
+from pathlib import Path
 import pandas as pd
 import streamlit as st
 from pandas import DataFrame, json_normalize
+from utils.uploads import Uploads
 
 
 class Outbox:
@@ -16,18 +19,17 @@ class Outbox:
 
     contents: dict
     posts: DataFrame
-    # TODO: Make not hard-coded
-    storage_url: str = "https://media.tech.lgbt"
 
-    def __init__(self, contents: DataFrame, debug: bool = False):
-        self.contents = contents
-        self.posts = json_normalize(contents["orderedItems"])
+    def __init__(self, debug: bool = False):
+
+        self.contents = Uploads.get_file("outbox.json")
+        self.posts = json_normalize(self.contents["orderedItems"])
 
         if debug:
             self.debugging()
-        self.setup()
+        self.show()
 
-    def _filter_posts(self):
+    def filter_posts(self):
         self.posts["published"] = pd.to_datetime(self.posts["published"])
         self.posts = self.posts[self.posts.type != "Announce"]
 
@@ -42,7 +44,7 @@ class Outbox:
                     attachments.append("None")
         self.posts["object.attachment"] = attachments
 
-    def _likes_per_month(self):
+    def likes_per_month(self):
         likes_per_month = pd.DataFrame(
             self.posts.groupby(pd.Grouper(key="published", freq="MS"))[
                 "object.likes.totalItems"
@@ -54,7 +56,7 @@ class Outbox:
         likes_per_month.index.name = "month"
         return likes_per_month
 
-    def _likes_per_post(self):
+    def likes_per_post(self):
         likes_per_post = pd.DataFrame(
             {
                 "published": self.posts["published"].values,
@@ -68,13 +70,13 @@ class Outbox:
         )
         return likes_per_post
 
-    def _most_liked_posts(self):
+    def most_liked_posts(self):
         raise NotImplementedError
 
-    def _most_boosted_posts(self):
+    def most_boosted_posts(self):
         raise NotImplementedError
 
-    def _most_liked_attachment(self, number: int = 10):
+    def most_liked_attachment(self, number: int = 10):
         lpp = self._likes_per_post()
         lpp = lpp[lpp.attachment != "None"]
         return lpp["likes"].nlargest(number).reset_index()
@@ -85,11 +87,11 @@ class Outbox:
             st.json(self.contents)
             st.dataframe(self.posts)
 
-    def setup(self):
+    def show(self):
         """Calls internal data methods and visualizes results"""
-        self._filter_posts()
-        lpp = self._likes_per_post()
-        lpm = self._likes_per_month()
+        self.filter_posts()
+        lpp = self.likes_per_post()
+        lpm = self.likes_per_month()
 
         left_column, right_column = st.columns(2, gap="large")
 

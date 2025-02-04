@@ -6,6 +6,7 @@ File contains actor class, used for:
 
 actor data from the users upload.
 """
+import streamlit as st
 
 
 class Actor:
