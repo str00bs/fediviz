@@ -1,9 +1,8 @@
 """File contains class for Layout management"""
 from typing import Sequence
-from pathlib import Path
 import streamlit as st
-from streamlit_extras.app_logo import add_logo
 from streamlit_extras.bottom_container import bottom
+from streamlit_extras.mention import mention
 
 from utils import Uploads
 from components import Actor, Bookmarks, Likes, Outbox
@@ -55,6 +54,8 @@ class Layout:
 
     def setup_footer(self):
         """Sets up app footer"""
-        # TODO: Fully implement
-        st.text("Footer")
-        # TODO: Coffee link
+        mention(
+            label="github.com/str00bs/fediviz",
+            icon="github",
+            url="https://github.com/str00bs/fediviz",
+        )
