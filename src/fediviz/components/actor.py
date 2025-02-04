@@ -9,6 +9,7 @@ actor data from the users upload.
 import streamlit as st
 from utils import Uploads
 from pandas import DataFrame
+from datetime import datetime
 
 
 class Actor:
@@ -61,3 +62,7 @@ class Actor:
             with right_column:
                 st.image(Uploads.get_image("header.jpg"))
                 st.table(self.tags_table())
+
+            with st.container(border=True):
+                st.header("Summary", divider=True)
+                st.html(self.contents["summary"])
