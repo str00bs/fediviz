@@ -6,10 +6,11 @@ File contains actor class, used for:
 
 actor data from the users upload.
 """
+import html
 import streamlit as st
 from utils import Uploads
 from pandas import DataFrame
-from datetime import datetime
+from streamlit_extras.stylable_container import stylable_container
 
 
 class Actor:
@@ -31,7 +32,7 @@ class Actor:
         df_tags = {"Tag": [], "Description": []}
         for entry in self.contents["attachment"]:
             df_tags["Tag"].append(entry["name"])
-            df_tags["Description"].append(entry["value"])
+            df_tags["Description"].append(html.unescape(entry["value"]))
 
         df = DataFrame(df_tags)
         df.set_index("Tag", inplace=True)
@@ -50,18 +51,23 @@ class Actor:
         """Calls internal data methods and visualizes results"""
         with st.container():
             st.header(self.contents["name"], divider=True)
+
+            with stylable_container("header_container", "{overflow: hidden; max-height: 15vh;}"):
+                st.image(Uploads.get_image("header.jpg"))
+
             left_column, right_column = st.columns(2)
+
             with left_column:
                 st.image(Uploads.get_image("avatar.png"))
+            with right_column:
+                # st.image(Uploads.get_image("header.jpg"))
+                st.table(self.tags_table())
                 st.link_button(
                     label=f"Profile: {self.fedi_url}",
                     url=self.http_url,
                     help="Click open profile on-instance",
                     type="primary"
                 )
-            with right_column:
-                st.image(Uploads.get_image("header.jpg"))
-                st.table(self.tags_table())
 
             with st.container(border=True):
                 st.header("Summary", divider=True)
