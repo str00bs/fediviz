@@ -1,6 +1,6 @@
 """File contains class for Layout management"""
 from typing import Sequence
-
+from pathlib import Path
 import streamlit as st
 from streamlit_extras.app_logo import add_logo
 from streamlit_extras.bottom_container import bottom
@@ -18,15 +18,14 @@ class Layout:
 
     def __init__(self):
         st.set_page_config(
-            # layout="wide",
             page_title="FediViz",
             page_icon=Config.FAVICON
         )
+        st.logo(Config.LOGO, size="large")
         self.setup_hero()
-        # if not Uploads.has_file():
         Uploads.show()
-
         if Uploads.has_file():
+            st.snow()
             self.setup_body()
 
         with bottom():
