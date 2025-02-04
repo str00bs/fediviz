@@ -44,6 +44,12 @@ class Outbox:
                     attachments.append("None")
         self.posts["object.attachment"] = attachments
 
+    def posts_by_day(self):
+        raise NotImplementedError
+
+    def posts_by_hour(self):
+        raise NotImplementedError
+
     def likes_per_month(self):
         likes_per_month = pd.DataFrame(
             self.posts.groupby(pd.Grouper(key="published", freq="MS"))[
