@@ -13,9 +13,15 @@ class Uploads:
 
     @staticmethod
     def get_file(name: str) -> dict:
-        """Gets user upload from path and returns it as a dictionary"""
+        """Gets JSON datafile from user archive and returns it as a dict"""
+        file = ZipFile(st.session_state.uploaded_file).read(name)
+        return json.loads(file.decode())
+
+    @staticmethod
+    def get_image(name: str):
+        """Gets image from user archive"""
         archive = ZipFile(st.session_state.uploaded_file).read(name)
-        return json.loads(archive.decode())
+        return archive
 
     @staticmethod
     def has_file() -> bool:
