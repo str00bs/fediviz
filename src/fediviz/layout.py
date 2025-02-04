@@ -35,7 +35,6 @@ class Layout:
     def setup_hero(self):
         """Sets up app hero"""
         st.title("FediViz")
-        st.logo(Config.FAVICON, size="large")
         # TODO: GitHub Link
 
     def setup_body(self):
