@@ -45,30 +45,27 @@ class Actor:
         server, user = self.http_url.split('@')
         server = server.replace('/', '').split('https:')[1]
 
-        self.fedi_url = f"@{server}@{user}"
+        self.fedi_url = f"@{user}@{server}"
 
     def show(self):
         """Calls internal data methods and visualizes results"""
-        with st.container():
-            st.header(self.contents["name"], divider=True)
+        st.header(self.contents["name"], divider=True)
 
-            with stylable_container("header_container", "{overflow: hidden; max-height: 15vh;}"):
-                st.image(Uploads.get_image("header.jpg"))
+        with stylable_container("header_container", "{overflow: hidden; max-height: 15vh;}"):
+            st.image(Uploads.get_image("header.jpg"))
 
-            left_column, right_column = st.columns(2)
+        left_column, right_column = st.columns(2)
 
-            with left_column:
-                st.image(Uploads.get_image("avatar.png"))
-            with right_column:
-                # st.image(Uploads.get_image("header.jpg"))
-                st.table(self.tags_table())
-                st.link_button(
-                    label=f"Profile: {self.fedi_url}",
-                    url=self.http_url,
-                    help="Click open profile on-instance",
-                    type="primary"
-                )
+        with left_column:
+            st.image(Uploads.get_image("avatar.png"))
+        with right_column:
+            st.table(self.tags_table())
+            st.link_button(
+                label=f"Profile: {self.fedi_url}",
+                url=self.http_url,
+                help="Click open profile on-instance",
+                type="primary"
+            )
 
-            with st.container(border=True):
-                st.header("Summary", divider=True)
-                st.html(self.contents["summary"])
+        st.header("Summary", divider=True)
+        st.html(self.contents["summary"])
