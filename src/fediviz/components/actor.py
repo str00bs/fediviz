@@ -8,7 +8,7 @@ actor data from the users upload.
 """
 import html
 import streamlit as st
-from utils import Uploads
+from utils import Uploads, Web
 from pandas import DataFrame
 from streamlit_extras.stylable_container import stylable_container
 
@@ -24,7 +24,6 @@ class Actor:
     def __init__(self):
         self.contents = Uploads.get_file("actor.json")
         self.get_links()
-
         self.show()
 
     def tags_table(self) -> DataFrame:
@@ -60,6 +59,13 @@ class Actor:
             st.image(Uploads.get_image("avatar.png"))
         with right_column:
             st.table(self.tags_table())
+
+            nested_left_col, nested_right_col = st.columns(2)
+
+            with nested_left_col:
+                st.metric("Followers", 5)
+            with nested_right_col:
+                st.metric("Follwing", 4)
             st.link_button(
                 label=f"Profile: {self.fedi_url}",
                 url=self.http_url,
