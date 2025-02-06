@@ -27,11 +27,11 @@ if __name__ == "__main__":
     # ? Define Views
     welcome_views = {
         "App": [
-            st.Page("views/welcome.py", title="Welcome", default=True),
+            st.Page("views/welcome.py", title="Welcome", default=True, icon=":material/home:"),
         ],
         "Resources": [
-            st.Page("views/license.py", title="License", url_path="license"),
-            st.Page("views/privacy.py", title="Privacy", url_path="privacy")
+            st.Page("views/license.py", title="License", url_path="license", icon=":material/license:"),
+            st.Page("views/privacy.py", title="Privacy", url_path="privacy", icon=":material/visibility_off:")
         ]
     }
 
