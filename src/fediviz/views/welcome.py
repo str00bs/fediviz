@@ -79,6 +79,11 @@ class WelcomePage:
                         base_url, user_name = st.session_state["welcome.user_url"].split("/@")
                         lookup_result_code, lookup_results = WebUtil.lookup_account(base_url, user_name)
                         if lookup_result_code == 200:
+                            StorageUtil.save_states(
+                                state_keys=StorageUtil.USER_OPTIONS,
+                                state_values=[lookup_results[v.strip("user.")] for v in StorageUtil.USER_OPTIONS]
+                            )
+                            st.session_state["toggles.has_followers"] = True
                             st.session_state["toggles.has_completed_steps"] = True
                             st.success('Successfully retrieved your followers/follows', icon="✅")
                             st.text("What did we just retrieve?")
