@@ -16,6 +16,9 @@ class _config:
     # ? Links
     GITHUB_URL: Path
 
+    # ? Toggles
+    DEBUGGING: bool
+
     def __init__(self):
         load_dotenv()
 
@@ -28,6 +31,9 @@ class _config:
 
         # ? Links
         self.GITHUB_URL = getenv("GITHUB_URL")
+
+        # ? Toggles
+        self.DEBUGGING = getenv("DEBUGGING", False)
 
 
 Config = _config()
