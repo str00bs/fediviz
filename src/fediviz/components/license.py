@@ -4,6 +4,7 @@ import streamlit as st
 
 def show_license():
     """Reuseable license component"""
+    # TODO: Load from state
     st.markdown("""
 
     The MIT License (MIT)
