@@ -42,10 +42,10 @@ if __name__ == "__main__":
 
     data_views = {
         "App": [
-            st.Page("views/profile.py", title="Profile", url_path="profile", icon=":material/person:"),
-            st.Page("views/bookmarks.py", title="Bookmarks", url_path="bookmarks", icon=":material/bookmark:"),
+            st.Page("views/profile.py", title="Profile", url_path="profile", icon=":material/account_circle:"),
+            st.Page("views/bookmarks.py", title="Bookmarks", url_path="bookmarks", icon=":material/bookmarks:"),
             st.Page("views/likes.py", title="Likes", url_path="likes", icon=":material/thumb_up:"),
-            st.Page("views/posts.py", title="Posts", url_path="posts", icon=":material/docs:"),
+            st.Page("views/posts.py", title="Posts", url_path="posts", icon=":material/stacked_email:"),
         ],
         "Resources": [
             st.Page("views/license.py", title="License", url_path="license", icon=":material/license:"),

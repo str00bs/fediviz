@@ -34,7 +34,7 @@ class BookmarksPage:
         """When class is called, the page is displayed"""
         self.bookmarks = Bookmarks(StorageMode.state)
 
-        st.title("Your Bookmark 📑 stats")
+        st.header("Your Bookmark :material/bookmark: stats")
         with st.expander("Totals", expanded=True):
             column_number = 0
             columns = st.columns(self.bookmarks.stats["labelled"].__len__())

@@ -36,7 +36,7 @@ class LikesPage:
         """When class is called, the page is displayed"""
         self.likes = Likes(StorageMode.state)
 
-        st.title("Your like 👍 stats")
+        st.header("Your Like :material/thumb_up: stats")
         with st.expander("Totals", expanded=True):
             column_number = 0
             columns = st.columns(self.likes.stats["labelled"].__len__())
