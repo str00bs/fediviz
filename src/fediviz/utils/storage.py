@@ -1,6 +1,7 @@
 """
 File contains StorageUtil used for managing static files and user uploads
 """
+from enum import Enum
 import json
 from typing import List, Optional
 from zipfile import ZipFile
@@ -8,8 +9,17 @@ import streamlit as st
 from config import Config
 
 
+class StorageMode(str, Enum):
+    """Decides whether to load from archive or state"""
+    archive = "archive",
+    state = "state"
+
+
 class StorageUtil:
     """Provides methods for accessing static files and user uploads"""
+
+    Mode: StorageMode = StorageMode
+
     FILE_OPTIONS: List[str] = [
         "actor.json",
         "bookmarks.json",

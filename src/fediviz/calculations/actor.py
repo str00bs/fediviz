@@ -1,14 +1,7 @@
 """File contains actor class, used for extracting & loading data from actor.json"""
 import html
-from enum import Enum
-from utils import StorageUtil
+from utils import StorageUtil, StorageMode
 from pandas import DataFrame
-
-
-class StorageMode(str, Enum):
-    """Where to load data from"""
-    archive = "archive"
-    state = "state"
 
 
 class Actor:
