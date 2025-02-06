@@ -10,23 +10,26 @@ import plotly.express as px
 
 
 class Likes:
-    """This class is used to extract & transform bookmarks data"""
+    """This class is used to extract & transform likes data"""
 
     # ? Static properties
-    FILE_NAME: str = "bookmarks.json"
+    FILE_NAME: str = "likes.json"
     data_file: dict
     mode: StorageMode
+    stats: dict
 
     def __init__(self, mode: StorageMode = StorageMode.state):
         self.data_file = StorageUtil.get_file(self.FILE_NAME, mode)
         self.mode = mode
+        self.stats = {}
+        self.extract_stats()
 
     def extract_stats(self, count: int = 5):
         """Method extracts """
 
         likes_per_server = {}
         likes_per_user = {}
-        for like in self.likes:
+        for like in self.data_file["orderedItems"]:
             server = like.split("https://")[1].split("/")[0]
             try:
                 user = like.split("users/")[1].split("/")[0]
@@ -36,7 +39,7 @@ class Likes:
             likes_per_server[server] = 0
             likes_per_user[f"@{user}@{server}"] = 0
 
-        for like in self.likes:
+        for like in self.data_file["orderedItems"]:
             server = like.split("https://")[1].split("/")[0]
             try:
                 user = like.split("users/")[1].split("/")[0]
