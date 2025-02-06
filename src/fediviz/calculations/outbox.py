@@ -16,8 +16,8 @@ class Outbox:
     mode: StorageMode
 
     # ? Results
-    likes_per_post: dict
-    likes_per_month: dict
+    likes_per_post: DataFrame
+    likes_per_month: DataFrame
 
     def __init__(self, mode: StorageMode = StorageMode.state):
         self.data_file = StorageUtil.get_file(self.FILE_NAME, mode)

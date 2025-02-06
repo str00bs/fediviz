@@ -15,16 +15,15 @@ class PostsPage:
     def __init__(self):
         """When class is called, the page is displayed"""
         self.posts = Outbox(StorageMode.state)
-        st.header("Your Posts")
+        st.header("Your Post :material/mail: stats")
 
-        left_column, right_column = st.columns(2, gap="large")
-
-        with left_column:
+        with st.expander("Likes per post"):
+            self.posts.likes_per_post.columns = self.posts.likes_per_post.columns.str.capitalize()
             st.header("Likes per post")
             st.bar_chart(
                 self.posts.likes_per_post,
-                y="likes",
-                x="published",
+                y="Likes",
+                x="Published",
                 y_label="Likes",
                 x_label="Published",
             )
@@ -32,17 +31,27 @@ class PostsPage:
             st.dataframe(
                 self.posts.likes_per_post,
                 column_config={
-                    "published": st.column_config.DatetimeColumn(),
-                    "likes": st.column_config.NumberColumn(),
-                    "post": st.column_config.LinkColumn(display_text="Open"),
+                    "Published": st.column_config.DatetimeColumn(),
+                    "Likes": st.column_config.NumberColumn(),
+                    "Post": st.column_config.LinkColumn(display_text="Open"),
                 },
+                use_container_width=True
             )
 
-        with right_column:
-            st.header("Likes Per Month")
-            st.line_chart(self.posts.likes_per_month, y="likes", y_label="Likes", x_label="Month")
+        with st.expander("Likes per Month"):
+            self.posts.likes_per_month.reset_index(inplace=True)
+            self.posts.likes_per_month.columns = self.posts.likes_per_month.columns.str.capitalize()
+            st.header("Likes per Month")
+            st.line_chart(self.posts.likes_per_month, y="Likes", y_label="Likes", x_label="Month")
             st.text("Dataset")
-            st.dataframe(self.posts.likes_per_month)
+            st.dataframe(
+                self.posts.likes_per_month,
+                column_config={
+                    "Month": st.column_config.DateColumn(),
+                    "Likes": st.column_config.NumberColumn()
+                },
+                use_container_width=True
+            )
 
 
 PostsPage()
