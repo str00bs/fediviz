@@ -16,6 +16,10 @@ class StorageUtil:
         "likes.json",
         "outbox.json",
     ]
+    IMAGE_OPTIONS: List[str] = [
+        "header.jpg",
+        "avatar.png",
+    ]
     STATE_OPTIONS: List[str] = {
         # ? Toggles
         "toggles.initialized",
@@ -29,11 +33,14 @@ class StorageUtil:
     @staticmethod
     def init_state():
         """Initializes global app state"""
-        for state in StorageUtil.STATE_OPTIONS:
-            st.session_state[state] = None
+        for state_key in StorageUtil.STATE_OPTIONS:
+            st.session_state[state_key] = None
 
-        for filepath in StorageUtil.FILE_OPTIONS:
-            st.session_state[f"files.{filepath}"] = None
+        for file_name in StorageUtil.FILE_OPTIONS:
+            st.session_state[f"files.{file_name}"] = None
+
+        for image_name in StorageUtil.IMAGE_OPTIONS:
+            st.session_state[f"images.{image_name}"] = None
 
         st.session_state["toggles.debugging"] = Config.DEBUGGING
         st.session_state["toggles.initialized"] = True
@@ -56,6 +63,14 @@ class StorageUtil:
         return archive
 
     @staticmethod
+    def get_state_image(name: str):
+        """Gets image from user archive"""
+        return st.session_state[f"images.{name}"]
+
+    @staticmethod
     def save_data():
-        for filepath in StorageUtil.FILE_OPTIONS:
-            st.session_state[f"files.{filepath}"] = StorageUtil.get_file(filepath)
+        for file_name in StorageUtil.FILE_OPTIONS:
+            st.session_state[f"files.{file_name}"] = StorageUtil.get_file(file_name)
+
+        for image_name in StorageUtil.IMAGE_OPTIONS:
+            st.session_state[f"images.{image_name}"] = StorageUtil.get_image(image_name)
