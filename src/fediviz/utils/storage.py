@@ -56,26 +56,22 @@ class StorageUtil:
         st.session_state["toggles.initialized"] = True
 
     @staticmethod
-    def get_file(name: str) -> dict:
+    def get_file(name: str, mode: StorageMode = StorageMode.archive) -> dict:
         """Gets JSON datafile from user archive and returns it as a dict"""
-        file = ZipFile(st.session_state.uploaded_file).read(name)
-        return json.loads(file.decode())
+        if mode == StorageMode.archive:
+            file = ZipFile(st.session_state.uploaded_file).read(name)
+            return json.loads(file.decode())
+        if mode == StorageMode.state:
+            return st.session_state[f"files.{name}"]
 
     @staticmethod
-    def get_state_file(name: str) -> dict:
-        """Gets datafile from state and returns it as a dict"""
-        return st.session_state[f"files.{name}"]
-
-    @staticmethod
-    def get_image(name: str):
+    def get_image(name: str, mode: StorageMode = StorageMode.archive):
         """Gets image from user archive"""
-        archive = ZipFile(st.session_state.uploaded_file).read(name)
-        return archive
-
-    @staticmethod
-    def get_state_image(name: str):
-        """Gets image from user archive"""
-        return st.session_state[f"images.{name}"]
+        if mode == StorageMode.archive:
+            archive = ZipFile(st.session_state.uploaded_file).read(name)
+            return archive
+        if mode == StorageMode.state:
+            return st.session_state[f"images.{name}"]
 
     @staticmethod
     def save_data():

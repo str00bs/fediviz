@@ -18,12 +18,12 @@ class ProfilePage:
         st.header(self.actor.name, divider=True)
 
         with stylable_container("header_container", "{overflow: hidden; max-height: 15vh;}"):
-            st.image(StorageUtil.get_image("header.jpg"))
+            st.image(StorageUtil.get_image("header.jpg", mode="state"))
 
         left_column, right_column = st.columns(2)
 
         with left_column:
-            st.image(StorageUtil.get_image("avatar.png"))
+            st.image(StorageUtil.get_image("avatar.png", mode="state"))
         with right_column:
             st.table(self.actor.tags)
 

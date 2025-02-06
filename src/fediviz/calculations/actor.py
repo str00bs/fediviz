@@ -19,11 +19,8 @@ class Actor:
     tags: dict
 
     def __init__(self, mode: StorageMode = "state"):
+        self.data_file = StorageUtil.get_file(self.FILE_NAME, mode)
         self.mode = mode
-        if mode == StorageMode.state:
-            self.data_file = StorageUtil.get_state_file(self.FILE_NAME)
-        if mode == StorageMode.archive:
-            self.data_file = StorageUtil.get_file(self.FILE_NAME)
 
         # ? Run extractions
         self.extract_name()
