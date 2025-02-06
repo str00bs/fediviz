@@ -61,7 +61,7 @@ class StorageUtil:
         for user_option in StorageUtil.USER_OPTIONS:
             st.session_state[f"user.{user_option}"] = None
 
-        st.session_state["toggles.debugging"] = Config.DEBUGGING
+        st.session_state["toggles.debugging"] = False
         st.session_state["toggles.initialized"] = True
 
     @staticmethod

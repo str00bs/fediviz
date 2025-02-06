@@ -13,6 +13,10 @@ from utils import StorageUtil
 import streamlit as st
 
 
+def debug_switch():
+    st.session_state["toggles.debugging"] = not st.session_state["toggles.debugging"]
+
+
 if __name__ == "__main__":
     # ? Set global streamlit configuration
     st.set_page_config(
@@ -52,6 +56,12 @@ if __name__ == "__main__":
     # ? Call global components
     show_hero()
     show_footer()
+
+    st.session_state["toggles.debugging"] = st.sidebar.toggle(
+        label="Debug",
+        value=False,
+        on_change=debug_switch
+    )
 
     # ? Decide on which views to display
     if st.session_state["toggles.has_completed_steps"]:
