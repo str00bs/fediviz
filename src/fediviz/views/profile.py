@@ -1,6 +1,6 @@
-"""File contains Profile page"""
+"""File contains profile page"""
 import streamlit as st
-from utils import StorageUtil
+from utils import StorageUtil, StorageMode
 from streamlit_extras.stylable_container import stylable_container
 from calculations import Actor
 
@@ -14,7 +14,7 @@ class ProfilePage:
 
     def __init__(self):
         """When class is called, the page is displayed"""
-        self.actor = Actor()
+        self.actor = Actor(StorageMode.state)
         st.header(self.actor.name, divider=True)
 
         with stylable_container("header_container", "{overflow: hidden; max-height: 15vh;}"):

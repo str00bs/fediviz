@@ -1,4 +1,4 @@
-"""File contains License page"""
+"""File contains license page"""
 import streamlit as st
 from components.license import show_license
 

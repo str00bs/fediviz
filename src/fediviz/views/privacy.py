@@ -1,4 +1,4 @@
-"""File contains Privacy page"""
+"""File contains privacy page"""
 import streamlit as st
 from components import show_privacy
 
