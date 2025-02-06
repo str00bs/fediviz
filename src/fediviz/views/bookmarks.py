@@ -5,6 +5,8 @@ import streamlit as st
 import plotly.express as px
 from collections import Counter
 from streamlit_extras.grid import grid
+from streamlit_extras.stylable_container import stylable_container
+from utils import StorageUtil
 
 
 class BookmarksPage:
@@ -33,8 +35,10 @@ class BookmarksPage:
     def __init__(self):
         """When class is called, the page is displayed"""
         self.bookmarks = Bookmarks(StorageMode.state)
+        st.header("Your Bookmark :material/bookmark: stats", divider=True)
+        with stylable_container("header_container", "{overflow: hidden; max-height: 15vh;}"):
+            st.image(StorageUtil.get_image("header.jpg", mode="state"))
 
-        st.header("Your Bookmark :material/bookmark: stats")
         with st.expander("Totals", expanded=True):
             column_number = 0
             columns = st.columns(self.bookmarks.stats["labelled"].__len__())
@@ -45,7 +49,7 @@ class BookmarksPage:
         with st.expander("Server Stats"):
             count = st.number_input("How many servers to show", value=10, min_value=5, step=5, max_value=50, key="server_input")
 
-            st.header(f"Your {count} most bookmarked servers")
+            st.header(f"Your {count} most bookmarked servers", divider=True)
             favourite = self.bookmarks.stats["most_bookmarked_server"]
             least = self.bookmarks.stats["least_bookmarked_server"]
 
@@ -62,7 +66,7 @@ class BookmarksPage:
         with st.expander("User stats"):
             count = st.number_input("How many users to show", value=10, min_value=5, step=5, max_value=50, key="user_input")
 
-            st.header(f"Your {count} most bookmarked users")
+            st.header(f"Your {count} most bookmarked users", divider=True)
             favourite = self.bookmarks.stats["most_bookmarked_user"]
             least = self.bookmarks.stats["least_bookmarked_user"]
 

@@ -29,7 +29,7 @@ class WelcomePage:
                     1. Go to your mastodon instance
                     2. Click -> Menu -> Preferences
                     3. Click -> Import and export
-                    4. Click -> Download Your Archive
+                    4. Click -> Download your archive
                     <!-- Override styling, it will apply on this page -->
                     <style>
                     [data-testid="stMarkdownContainer"] ol{
@@ -59,7 +59,7 @@ class WelcomePage:
                 )
                 if result is not None:
                     st.success("Successfully uploaded export", icon="✅")
-                    btn_context = st.button("Continue now", on_click=StorageUtil.save_data)
+                    btn_context = st.button("Continue now", on_click=StorageUtil.save_data, type="primary")
                     if btn_context:
                         st.session_state["toggles.has_completed_steps"] = True
                         st.rerun()
@@ -75,7 +75,7 @@ class WelcomePage:
                         This is done with a lookup request to your server asking for your followers/follows
                         """)
                 if st.session_state["welcome.user_url"] is not None:
-                    if st.button("Send requests", key="Welcome.Button.SendRequest"):
+                    if st.button("Send requests", key="Welcome.Button.SendRequest", type="primary"):
                         base_url, user_name = st.session_state["welcome.user_url"].split("/@")
                         lookup_result_code, lookup_results = WebUtil.lookup_account(base_url, user_name)
                         if lookup_result_code == 200:
@@ -88,7 +88,7 @@ class WelcomePage:
                             st.success('Successfully retrieved your followers/follows', icon="✅")
                             st.text("What did we just retrieve?")
                             st.json(lookup_results, expanded=False)
-                            if st.button("Continue", key="Welcome.Button.Continue", on_click=StorageUtil.save_data):
+                            if st.button("Continue", key="Welcome.Button.Continue", on_click=StorageUtil.save_data, type="primary"):
                                 st.session_state["toggles.has_completed_steps"] = True
                                 st.rerun()
                         else:

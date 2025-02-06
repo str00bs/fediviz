@@ -15,16 +15,18 @@ class ProfilePage:
     def __init__(self):
         """When class is called, the page is displayed"""
         self.actor = Actor(StorageMode.state)
-        st.header(self.actor.name, divider=True)
-
+        st.header(":material/account_circle: Profile", divider=True)
         with stylable_container("header_container", "{overflow: hidden; max-height: 15vh;}"):
             st.image(StorageUtil.get_image("header.jpg", mode="state"))
 
         left_column, right_column = st.columns(2)
 
         with left_column:
+            st.html("")
+            st.html("")
             st.image(StorageUtil.get_image("avatar.png", mode="state"))
         with right_column:
+            st.html(f"<h1>{self.actor.name}</h1>")
             st.table(self.actor.tags)
 
             nested_left_col, nested_right_col = st.columns(2)
@@ -44,7 +46,9 @@ class ProfilePage:
             )
 
         st.header("Summary", divider=True)
+
         st.html(self.actor.summary)
+
 
 
 ProfilePage()

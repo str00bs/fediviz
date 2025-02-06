@@ -15,11 +15,11 @@ class PostsPage:
     def __init__(self):
         """When class is called, the page is displayed"""
         self.posts = Outbox(StorageMode.state)
-        st.header("Your Post :material/mail: stats")
+        st.header("Your Post :material/mail: stats", divider=True)
 
         with st.expander("Likes per post"):
             self.posts.likes_per_post.columns = self.posts.likes_per_post.columns.str.capitalize()
-            st.header("Likes per post")
+            st.header("Likes per post", divider=True)
             st.bar_chart(
                 self.posts.likes_per_post,
                 y="Likes",
@@ -41,7 +41,7 @@ class PostsPage:
         with st.expander("Likes per Month"):
             self.posts.likes_per_month.reset_index(inplace=True)
             self.posts.likes_per_month.columns = self.posts.likes_per_month.columns.str.capitalize()
-            st.header("Likes per Month")
+            st.header("Likes per Month", divider=True)
             st.line_chart(self.posts.likes_per_month, y="Likes", y_label="Likes", x_label="Month")
             st.text("Dataset")
             st.dataframe(

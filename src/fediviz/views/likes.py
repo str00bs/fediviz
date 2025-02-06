@@ -36,7 +36,7 @@ class LikesPage:
         """When class is called, the page is displayed"""
         self.likes = Likes(StorageMode.state)
 
-        st.header("Your Like :material/thumb_up: stats")
+        st.header("Your Like :material/thumb_up: stats", divider=True)
         with st.expander("Totals", expanded=True):
             column_number = 0
             columns = st.columns(self.likes.stats["labelled"].__len__())
@@ -47,7 +47,7 @@ class LikesPage:
         with st.expander("Server Stats"):
             count = st.number_input("How many servers to show", value=10, min_value=5, step=5, max_value=50, key="server_input")
 
-            st.header(f"Your {count} most liked servers")
+            st.header(f"Your {count} most liked servers", divider=True)
             favourite = self.likes.stats["most_liked_server"]
             least = self.likes.stats["least_liked_server"]
 
@@ -64,7 +64,7 @@ class LikesPage:
         with st.expander("User stats"):
             count = st.number_input("How many users to show", value=10, min_value=5, step=5, max_value=50, key="user_input")
 
-            st.header(f"Your {count} most liked users")
+            st.header(f"Your {count} most liked users", divider=True)
             favourite = self.likes.stats["most_liked_user"]
             least = self.likes.stats["least_liked_user"]
 
