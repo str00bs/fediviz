@@ -1,14 +1,7 @@
-"""
-File contains Likes class, used for:
-- Loading
-- Transforming
-- Displaying
-
-likes data from the users upload.
-"""
+"""File contains likes class, used for extracting & loading data from likes.json"""
 from typing import Tuple, List
 import streamlit as st
-from utils import Uploads
+from utils import StorageUtil
 from pandas import DataFrame
 from collections import Counter
 from streamlit_extras.row import row
@@ -24,7 +17,7 @@ class Likes:
     stats: dict = {}
 
     def __init__(self):
-        self.contents = Uploads.get_file("likes.json")
+        self.contents = StorageUtil.get_file("likes.json")
         self.likes = self.contents["orderedItems"]
         self.extract_stats()
         self.show()

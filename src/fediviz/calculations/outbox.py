@@ -1,17 +1,10 @@
-"""
-File contains Likes class, used for:
-- Loading
-- Transforming
-- Displaying
-
-likes data from the users upload.
-"""
+"""File contains outbox class, used for extracting & loading data from outbox.json"""
 import json
 from pathlib import Path
 import pandas as pd
 import streamlit as st
 from pandas import DataFrame, json_normalize
-from utils.uploads import Uploads
+from utils.storage import StorageUtil
 
 
 class Outbox:
@@ -22,7 +15,7 @@ class Outbox:
 
     def __init__(self, debug: bool = False):
 
-        self.contents = Uploads.get_file("outbox.json")
+        self.contents = StorageUtil.get_file("outbox.json")
         self.posts = json_normalize(self.contents["orderedItems"])
 
         if debug:
