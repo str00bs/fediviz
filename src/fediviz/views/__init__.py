@@ -4,12 +4,12 @@ Module contains app views.
 """
 from .license import LicensePage
 from .privacy import PrivacyPage
-# from .welcome import WelcomePage
-# from .profile import ProfilePage
+from .welcome import WelcomePage
+from .profile import ProfilePage
 
 __all__ = [
     "LicensePage",
     "PrivacyPage",
-#     "WelcomePage",
-#     "ProfilePage"
+    "WelcomePage",
+    "ProfilePage"
 ]
