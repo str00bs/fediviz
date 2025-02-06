@@ -16,6 +16,10 @@ class _config:
     # ? Links
     GITHUB_URL: Path
 
+    # ? Files
+    LICENSE: str
+    PRIVACY: str
+
     def __init__(self):
         load_dotenv()
 
@@ -28,6 +32,13 @@ class _config:
 
         # ? Links
         self.GITHUB_URL = getenv("GITHUB_URL")
+
+        # ? Toggles
+        self.DEBUGGING = getenv("DEBUGGING")
+
+        # ? Files
+        self.LICENSE = self.STATIC_DIR.joinpath(getenv("LICENSE"))
+        self.PRIVACY = self.STATIC_DIR.joinpath(getenv("PRIVACY"))
 
 
 Config = _config()

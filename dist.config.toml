@@ -2,3 +2,9 @@
 runOnSave = true
 enableStaticServing = true
 maxUploadSize = 1000
+
+[theme]
+base="dark"
+primaryColor="#5c49e1"
+secondaryBackgroundColor="#373e75"
+textColor="#FAFAFA"

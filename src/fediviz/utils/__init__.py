@@ -1,4 +1,5 @@
 """Module contains utility classes and functions"""
-from .uploads import Uploads
+from .storage import StorageUtil, StorageMode
+from .web import WebUtil
 
-__all__ = ["Uploads"]
+__all__ = ["StorageUtil", "StorageMode", "WebUtil"]

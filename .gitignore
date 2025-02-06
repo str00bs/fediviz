@@ -193,7 +193,6 @@ Thumbs.db
 src/.env
 .env
 docker-compose.yml
-src/fediviz/static/uploads/**/
 config.toml
-test_data/
+src/fediviz/static/tmp/**
 .streamlit/
