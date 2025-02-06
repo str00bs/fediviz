@@ -58,4 +58,4 @@ class StorageUtil:
     @staticmethod
     def save_data():
         for filepath in StorageUtil.FILE_OPTIONS:
-            st.session_state["files"][filepath] = StorageUtil.get_file(filepath)
+            st.session_state[f"files.{filepath}"] = StorageUtil.get_file(filepath)
