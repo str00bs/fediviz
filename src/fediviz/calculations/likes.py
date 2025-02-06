@@ -1,7 +1,7 @@
 """File contains likes class, used for extracting & loading data from likes.json"""
 from typing import Tuple, List
 import streamlit as st
-from utils import StorageUtil
+from utils import StorageUtil, StorageMode
 from pandas import DataFrame
 from collections import Counter
 from streamlit_extras.row import row
@@ -10,17 +10,16 @@ import plotly.express as px
 
 
 class Likes:
-    """This class loads, transforms and displays Likes data"""
+    """This class is used to extract & transform bookmarks data"""
 
-    contents: dict
-    likes: List[str]
-    stats: dict = {}
+    # ? Static properties
+    FILE_NAME: str = "bookmarks.json"
+    data_file: dict
+    mode: StorageMode
 
-    def __init__(self):
-        self.contents = StorageUtil.get_file("likes.json")
-        self.likes = self.contents["orderedItems"]
-        self.extract_stats()
-        self.show()
+    def __init__(self, mode: StorageMode = StorageMode.state):
+        self.data_file = StorageUtil.get_file(self.FILE_NAME, mode)
+        self.mode = mode
 
     def extract_stats(self, count: int = 5):
         """Method extracts """

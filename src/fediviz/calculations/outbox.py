@@ -4,23 +4,31 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 from pandas import DataFrame, json_normalize
-from utils.storage import StorageUtil
+from utils import StorageUtil, StorageMode
 
 
 class Outbox:
-    """This class loads, transforms and displays Likes data"""
+    """This class is used to extract & transform outbox data"""
 
-    contents: dict
-    posts: DataFrame
+    # ? Static properties
+    FILE_NAME: str = "outbox.json"
+    data_file: dict
+    mode: StorageMode
 
-    def __init__(self, debug: bool = False):
+    def __init__(self, mode: StorageMode = StorageMode.state):
+        self.data_file = StorageUtil.get_file(self.FILE_NAME, mode)
+        self.mode = mode
 
-        self.contents = StorageUtil.get_file("outbox.json")
-        self.posts = json_normalize(self.contents["orderedItems"])
+    # contents: dict
+    # posts: DataFrame
 
-        if debug:
-            self.debugging()
-        self.show()
+    # def __init__(self, debug: bool = False):
+    #     self.contents = StorageUtil.get_file("outbox.json")
+    #     self.posts = json_normalize(self.contents["orderedItems"])
+
+    #     if debug:
+    #         self.debugging()
+    #     self.show()
 
     def filter_posts(self):
         self.posts["published"] = pd.to_datetime(self.posts["published"])

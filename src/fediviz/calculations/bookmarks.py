@@ -1,11 +1,15 @@
 """File contains bookmarks class, used for extracting & loading data from bookmarks.json"""
-from utils import StorageUtil
+from utils import StorageUtil, StorageMode
 
 
 class Bookmarks:
-    """This class loads, transforms and displays bookmarks data"""
+    """This class is used to extract & transform bookmarks data"""
 
-    contents: dict
+    # ? Static properties
+    FILE_NAME: str = "bookmarks.json"
+    data_file: dict
+    mode: StorageMode
 
-    def __init__(self):
-        self.contents = StorageUtil.get_file("bookmarks.json")
+    def __init__(self, mode: StorageMode = StorageMode.state):
+        self.data_file = StorageUtil.get_file(self.FILE_NAME, mode)
+        self.mode = mode

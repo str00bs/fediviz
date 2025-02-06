@@ -5,11 +5,12 @@ from pandas import DataFrame
 
 
 class Actor:
-    """This class is used to extract & transform Actor data"""
+    """This class is used to extract & transform actor data"""
 
     # ? Static properties
     FILE_NAME: str = "actor.json"
     data_file: dict
+    mode: StorageMode
 
     # ? Dynamic (data) properties
     name: str
@@ -18,7 +19,7 @@ class Actor:
     fedi_url: str
     tags: dict
 
-    def __init__(self, mode: StorageMode = "state"):
+    def __init__(self, mode: StorageMode = StorageMode.state):
         self.data_file = StorageUtil.get_file(self.FILE_NAME, mode)
         self.mode = mode
 
