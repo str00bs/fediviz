@@ -3,7 +3,7 @@ File contains StorageUtil used for managing static files and user uploads
 """
 from enum import Enum
 import json
-from typing import List, Optional
+from typing import List, Any, Literal
 from zipfile import ZipFile
 import streamlit as st
 from config import Config
@@ -30,7 +30,7 @@ class StorageUtil:
         "header.jpg",
         "avatar.png",
     ]
-    STATE_OPTIONS: List[str] = {
+    STATE_OPTIONS: List[str] = [
         # ? Toggles
         "toggles.initialized",
         "toggles.debugging",
@@ -38,7 +38,13 @@ class StorageUtil:
         "toggles.has_followers",
         # ? Pages
         "welcome.user_url",
-    }
+    ]
+    USER_OPTIONS: List[str] = [
+        "user.id",
+        "user.followers_count",
+        "user.following_count",
+        "user.created_at",
+    ]
 
     @staticmethod
     def init_state():
@@ -51,6 +57,9 @@ class StorageUtil:
 
         for image_name in StorageUtil.IMAGE_OPTIONS:
             st.session_state[f"images.{image_name}"] = None
+
+        for user_option in StorageUtil.USER_OPTIONS:
+            st.session_state[f"user.{user_option}"] = None
 
         st.session_state["toggles.debugging"] = Config.DEBUGGING
         st.session_state["toggles.initialized"] = True
@@ -73,6 +82,7 @@ class StorageUtil:
         if mode == StorageMode.state:
             return st.session_state[f"images.{name}"]
 
+    # ? Callbacks
     @staticmethod
     def save_data():
         for file_name in StorageUtil.FILE_OPTIONS:
@@ -80,3 +90,9 @@ class StorageUtil:
 
         for image_name in StorageUtil.IMAGE_OPTIONS:
             st.session_state[f"images.{image_name}"] = StorageUtil.get_image(image_name)
+
+    @staticmethod
+    def save_states(state_keys: List[str], state_values: List[Any]):
+        """Used as callback to save specific state k,v"""
+        for state_key, state_value in zip(state_keys, state_values):
+            st.session_state[state_key] = state_value
