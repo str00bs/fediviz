@@ -19,6 +19,10 @@ class _config:
     # ? Toggles
     DEBUGGING: bool
 
+    # ? Files
+    LICENSE: str
+    PRIVACY: str
+
     def __init__(self):
         load_dotenv()
 
@@ -35,5 +39,8 @@ class _config:
         # ? Toggles
         self.DEBUGGING = getenv("DEBUGGING", False)
 
+        # ? Files
+        self.LICENSE = self.STATIC_DIR.joinpath(getenv("LICENSE"))
+        self.PRIVACY = self.STATIC_DIR.joinpath(getenv("PRIVACY"))
 
 Config = _config()

@@ -23,6 +23,7 @@ if __name__ == "__main__":
     # ? Initialize global state
     if "toggles.initialized" not in st.session_state:
         StorageUtil.init_state()
+        StorageUtil.load_extras()
 
     # ? Define Views
     welcome_views = {

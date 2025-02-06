@@ -96,3 +96,12 @@ class StorageUtil:
         """Used as callback to save specific state k,v"""
         for state_key, state_value in zip(state_keys, state_values):
             st.session_state[state_key] = state_value
+
+    @staticmethod
+    def load_extras():
+        """Loads the privacy and license files from disk to state"""
+        with open(Config.LICENSE) as license_file:
+            st.session_state[f"files.LICENSE.md"] = license_file.read()
+
+        with open(Config.PRIVACY) as privacy_file:
+            st.session_state[f"files.PRIVACY.md"] = privacy_file.read()
