@@ -29,10 +29,13 @@ class ProfilePage:
 
             nested_left_col, nested_right_col = st.columns(2)
 
-            with nested_left_col:
-                st.metric("Followers", 5)
-            with nested_right_col:
-                st.metric("Follwing", 4)
+            if st.session_state["toggles.has_followers"]:
+                with nested_left_col:
+                    st.metric("Followers", st.session_state["user.followers_count"])
+                with nested_right_col:
+                    st.metric("Follwing", st.session_state["user.following_count"])
+            else:
+                st.text("No followers/follows loaded")
             st.link_button(
                 label=f"Profile: {self.actor.fedi_url}",
                 url=self.actor.http_url,
