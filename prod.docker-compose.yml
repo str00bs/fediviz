@@ -1,0 +1,26 @@
+services:
+  fediviz:
+    image: str00bs/fediviz:latest
+    container_name: fediviz
+    restart: unless-stopped
+    networks:
+      - fediviz-net
+      - proxy
+    env_file:
+      - dist.env
+    labels:
+      - traefik.enable=true
+      # Routers
+      - traefik.http.routers.fediviz.tls=true
+      - traefik.http.routers.fediviz.tls.certresolver=letsencrypt
+      - traefik.http.routers.fediviz.entrypoints=https
+      - traefik.http.routers.fediviz.rule=Host(`${DOMAIN}`)
+      # Services
+      - traefik.http.services.fediviz.loadbalancer.server.port=80
+
+networks:
+  fediviz-net:
+    name: fediviz-net
+    external: false
+  proxy:
+    external: true

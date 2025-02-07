@@ -30,14 +30,18 @@ if __name__ == "__main__":
         StorageUtil.load_extras()
 
     # ? Define Views
+    resources_views = {
+        "Resources": [
+            st.Page("views/license.py", title="License", url_path="license", icon=":material/license:"),
+            st.Page("views/privacy.py", title="Privacy", url_path="privacy", icon=":material/visibility_off:"),
+            st.Page("views/docs.py", title="Docs", url_path="docs", icon=":material/support:")
+        ]
+    }
     welcome_views = {
         "App": [
             st.Page("views/welcome.py", title="Welcome", default=True, icon=":material/home:"),
         ],
-        "Resources": [
-            st.Page("views/license.py", title="License", url_path="license", icon=":material/license:"),
-            st.Page("views/privacy.py", title="Privacy", url_path="privacy", icon=":material/visibility_off:")
-        ]
+        **resources_views
     }
 
     data_views = {
@@ -47,10 +51,7 @@ if __name__ == "__main__":
             st.Page("views/likes.py", title="Likes", url_path="likes", icon=":material/thumb_up:"),
             st.Page("views/posts.py", title="Posts", url_path="posts", icon=":material/stacked_email:"),
         ],
-        "Resources": [
-            st.Page("views/license.py", title="License", url_path="license", icon=":material/license:"),
-            st.Page("views/privacy.py", title="Privacy", url_path="privacy", icon=":material/visibility_off:"),
-        ]
+        **resources_views
     }
 
     # ? Call global components
