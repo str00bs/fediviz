@@ -1,6 +1,6 @@
 """File contains reuseable privacy component"""
+
 import streamlit as st
-from config import Config
 
 
 def show_privacy():

@@ -1,32 +1,48 @@
-# Docs
-TODO.
+# FediViz
+This repository contains a mastodon (fedi) visualising tool.
 
-## Setup & Build
-TODO.
+Fro the apps license agreement, see `LICENSE.md`
+For the apps privacy statement, see `PRIVACY.md`
 
-## Run
-TODO.
+## Setup
+This section contains steps for how to setup and run the application in various cases.
 
-### Locally
-TODO.
+### For local runs
+1. Install dependencies: `poetry install`
+2. Copy configuration files
+   - `mkdir src/.streamlit && cp dist.config.toml src/.streamlit/config.toml`
+   - `cp dist.env src/.env`
+3. Copy markdown pages:
+   - `cp LICENSE.md src/fediviz/static/LICENSE.md`
+   - `cp README.md src/fediviz/static/README.md`
+   - `cp PRIVACY.md src/fediviz/static/PRIVACY.md`
 
-### Deployment
-TODO.
+### For docker runs
+1. Build image: `docker build . --tag=fediviz:local`
+2. Run image: `docker run fediviz:local`
+
+### For production
+TODO: Write instructions
 
 ## Testing
-TODO.
+TODO: Setup test suite, and write instructions.
 
 ## Contributing
-TODO.
+TODO: Write contribution guide.
 
 ## Resources
-TODO.
-
-### General
-TODO.
-
-### SDK
-TODO.
+TODO: Write resources overview, so that people may learn the used tools.
 
 ### Credits
-TODO.
+TODO: Filter and include the credits here, once it's clear which assets will be used.
+
+## Housekeeping
+A list of non-urgent TODO's
+1. Setup badges
+2. Activate deepsource
+3. Activate dependabot
+4. Activate securitybot
+5. Run static analysis
+6. Make first release for github and dockerhub
+7. Add VSC helpers.
+8. Write tests.

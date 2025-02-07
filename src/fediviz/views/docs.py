@@ -1,4 +1,5 @@
 """File contains Docs page"""
+
 import streamlit as st
 from components.docs import show_docs
 

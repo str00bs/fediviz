@@ -6,11 +6,11 @@ Application main file
 - Runs the application
 """
 
-from config import Config
+import streamlit as st
 from components.footer import show_footer
 from components.hero import show_hero
+from config import Config
 from utils import StorageUtil
-import streamlit as st
 
 
 def debug_switch():
@@ -19,10 +19,7 @@ def debug_switch():
 
 if __name__ == "__main__":
     # ? Set global streamlit configuration
-    st.set_page_config(
-        page_title="FediViz",
-        page_icon=Config.FAVICON
-    )
+    st.set_page_config(page_title="FediViz", page_icon=Config.FAVICON)
 
     # ? Initialize global state
     if "toggles.initialized" not in st.session_state:
@@ -32,26 +29,66 @@ if __name__ == "__main__":
     # ? Define Views
     resources_views = {
         "Resources": [
-            st.Page("views/license.py", title="License", url_path="license", icon=":material/license:"),
-            st.Page("views/privacy.py", title="Privacy", url_path="privacy", icon=":material/visibility_off:"),
-            st.Page("views/docs.py", title="Docs", url_path="docs", icon=":material/support:")
+            st.Page(
+                "views/docs.py",
+                title="Docs",
+                url_path="docs",
+                icon=":material/support:",
+            ),
+            st.Page(
+                "views/license.py",
+                title="License",
+                url_path="license",
+                icon=":material/license:",
+            ),
+            st.Page(
+                "views/privacy.py",
+                title="Privacy",
+                url_path="privacy",
+                icon=":material/visibility_off:",
+            ),
         ]
     }
     welcome_views = {
         "App": [
-            st.Page("views/welcome.py", title="Welcome", default=True, icon=":material/home:"),
+            st.Page(
+                "views/welcome.py",
+                title="Welcome",
+                default=True,
+                icon=":material/home:",
+            ),
         ],
-        **resources_views
+        **resources_views,
     }
 
     data_views = {
         "App": [
-            st.Page("views/profile.py", title="Profile", url_path="profile", icon=":material/account_circle:"),
-            st.Page("views/bookmarks.py", title="Bookmarks", url_path="bookmarks", icon=":material/bookmarks:"),
-            st.Page("views/likes.py", title="Likes", url_path="likes", icon=":material/thumb_up:"),
-            st.Page("views/posts.py", title="Posts", url_path="posts", icon=":material/stacked_email:"),
+            st.Page(
+                "views/profile.py",
+                title="Profile",
+                url_path="profile",
+                icon=":material/account_circle:",
+            ),
+            st.Page(
+                "views/bookmarks.py",
+                title="Bookmarks",
+                url_path="bookmarks",
+                icon=":material/bookmarks:",
+            ),
+            st.Page(
+                "views/likes.py",
+                title="Likes",
+                url_path="likes",
+                icon=":material/thumb_up:",
+            ),
+            st.Page(
+                "views/posts.py",
+                title="Posts",
+                url_path="posts",
+                icon=":material/stacked_email:",
+            ),
         ],
-        **resources_views
+        **resources_views,
     }
 
     # ? Call global components
@@ -59,9 +96,7 @@ if __name__ == "__main__":
     show_footer()
 
     st.session_state["toggles.debugging"] = st.sidebar.toggle(
-        label="Debug",
-        value=False,
-        on_change=debug_switch
+        label="Debug", value=False, on_change=debug_switch
     )
 
     # ? Decide on which views to display

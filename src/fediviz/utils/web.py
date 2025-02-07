@@ -1,6 +1,8 @@
 """File contains WebUtil used for retrieving data using web requests"""
+
+from logging import Logger, getLogger
 from typing import Tuple
-from logging import getLogger, Logger
+
 import requests
 
 logger: Logger = getLogger("__name__")

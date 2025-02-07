@@ -1,4 +1,5 @@
 """File contains reuseable footer component"""
+
 from streamlit_extras.bottom_container import bottom
 from streamlit_extras.mention import mention
 

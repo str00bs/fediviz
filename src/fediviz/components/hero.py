@@ -1,4 +1,5 @@
 """File contains reuseable hero component"""
+
 import streamlit as st
 from config import Config
 

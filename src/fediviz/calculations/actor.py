@@ -1,8 +1,10 @@
 """File contains actor class, used for extracting & loading data from actor.json"""
+
 import html
 from typing import List
-from utils import StorageUtil, StorageMode
+
 from pandas import DataFrame
+from utils import StorageMode, StorageUtil
 
 
 class Actor:
@@ -47,8 +49,8 @@ class Actor:
         """Extract links from actor.json"""
         self.http_url = self.data_file["url"]
 
-        server, user = self.http_url.split('@')
-        server = server.replace('/', '').split('https:')[1]
+        server, user = self.http_url.split("@")
+        server = server.replace("/", "").split("https:")[1]
 
         self.fedi_url = f"@{user}@{server}"
 

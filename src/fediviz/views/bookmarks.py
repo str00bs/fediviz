@@ -1,12 +1,13 @@
 """File contains bookmarks page"""
-from utils import StorageMode
-from calculations import Bookmarks
-import streamlit as st
-import plotly.express as px
+
 from collections import Counter
+
+import plotly.express as px
+import streamlit as st
+from calculations import Bookmarks
 from streamlit_extras.grid import grid
 from streamlit_extras.stylable_container import stylable_container
-from utils import StorageUtil
+from utils import StorageMode, StorageUtil
 
 
 class BookmarksPage:
@@ -28,7 +29,9 @@ class BookmarksPage:
 
         my_grid = grid(*grid_numbers)
 
-        for entity, like_count in Counter(self.bookmarks.stats[f"bookmarks_per_{who}"]).most_common(count):
+        for entity, like_count in Counter(
+            self.bookmarks.stats[f"bookmarks_per_{who}"]
+        ).most_common(count):
             my_grid.metric(entity, like_count)
             col_number += 1
 
@@ -36,7 +39,9 @@ class BookmarksPage:
         """When class is called, the page is displayed"""
         self.bookmarks = Bookmarks(StorageMode.state)
         st.header("Your Bookmark :material/bookmark: stats", divider=True)
-        with stylable_container("header_container", "{overflow: hidden; max-height: 15vh;}"):
+        with stylable_container(
+            "header_container", "{overflow: hidden; max-height: 15vh;}"
+        ):
             st.image(StorageUtil.get_image("header.jpg", mode="state"))
 
         with st.expander("Totals", expanded=True):
@@ -47,7 +52,14 @@ class BookmarksPage:
                 column_number += 1
 
         with st.expander("Server Stats"):
-            count = st.number_input("How many servers to show", value=10, min_value=5, step=5, max_value=50, key="server_input")
+            count = st.number_input(
+                "How many servers to show",
+                value=10,
+                min_value=5,
+                step=5,
+                max_value=50,
+                key="server_input",
+            )
 
             st.header(f"Your {count} most bookmarked servers", divider=True)
             favourite = self.bookmarks.stats["most_bookmarked_server"]
@@ -58,13 +70,20 @@ class BookmarksPage:
                 names="Server",
                 values="Count",
                 title=f"Seems like {favourite} is where it's interesting 🔍",
-                subtitle=f"but posts on {least} are still worth checking out 🏃"
+                subtitle=f"but posts on {least} are still worth checking out 🏃",
             )
             st.plotly_chart(fig)
             self.most_bookmarked_grid("server", count)
 
         with st.expander("User stats"):
-            count = st.number_input("How many users to show", value=10, min_value=5, step=5, max_value=50, key="user_input")
+            count = st.number_input(
+                "How many users to show",
+                value=10,
+                min_value=5,
+                step=5,
+                max_value=50,
+                key="user_input",
+            )
 
             st.header(f"Your {count} most bookmarked users", divider=True)
             favourite = self.bookmarks.stats["most_bookmarked_user"]
@@ -75,11 +94,10 @@ class BookmarksPage:
                 names="User",
                 values="Count",
                 title=f"For you, posts by {favourite} is worth saving 💾",
-                subtitle=f"...but still you still read posts from {least} 👓"
+                subtitle=f"...but still you still read posts from {least} 👓",
             )
             st.plotly_chart(fig)
             self.most_bookmarked_grid("user", count)
-
 
 
 BookmarksPage()
