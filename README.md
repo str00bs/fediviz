@@ -1,8 +1,8 @@
-# FediViz
-This repository contains a mastodon (fedi) visualising tool.
+# FediViz <img src='resources/images/bar-chart.png' width=32 alt="bar chart">
 
-Fro the apps license agreement, see `LICENSE.md`
-For the apps privacy statement, see `PRIVACY.md`
+This repository contains a visualisation tool built on mastodon accountexports.
+- For the apps license agreement, see `LICENSE.md`
+- For the apps privacy statement, see `PRIVACY.md`
 
 ## Setup
 This section contains steps for how to setup and run the application in various cases.
@@ -39,10 +39,10 @@ TODO: Filter and include the credits here, once it's clear which assets will be 
 ## Housekeeping
 A list of non-urgent TODO's
 1. Setup badges
-2. Activate deepsource
+2. ~~Activate deepsource~~
 3. Activate dependabot
 4. Activate securitybot
-5. Run static analysis
+5. ~~Run static analysis~~
 6. Make first release for github and dockerhub
-7. Add VSC helpers.
+7. ~~Add VSC helpers.~~
 8. Write tests.
