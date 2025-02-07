@@ -189,10 +189,13 @@ Thumbs.db
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,macos
 
-## Development & Deployment files ##
-src/.env
+
+## Development ##
 .env
-docker-compose.yml
 config.toml
 src/fediviz/static/tmp/**
 .streamlit/
+
+## Deployment ##
+src/fediviz/static/*.md
+docker-compose.yml
