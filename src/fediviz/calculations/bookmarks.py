@@ -30,48 +30,12 @@ class Bookmarks:
     def __init__(self, mode: StorageMode = StorageMode.state):
         self.data_file = StorageUtil.get_file(self.FILE_NAME, mode)
         self.mode = mode
-        # self.data = {}
-        # self.extract_count()
-        # self.extract_counts_by()
-
         self.stats = {}
         self.extract_bookmarks_per()
         self.extract_most_least()
 
     def extract_count(self):
         self.count = len(self.data_file["orderedItems"])
-
-    # def extract_counts_by(self):
-    #     data = {
-    #         "bookmarks_by_server": {},
-    #         "bookmarks_by_account": {}
-    #     }
-    #     for entry in self.data_file["orderedItems"]:
-    #         entry = entry.split("https://")[1]
-    #         entry = entry.split("/")
-    #         # ? [server, 'users' || random, user, 'statuses', status_id]
-
-    #         if entry[0] in data["bookmarks_by_server"].keys():
-    #             data["bookmarks_by_server"][entry[0]] += 1
-    #         else:
-    #             data["bookmarks_by_server"][entry[0]] = 1
-
-    #         if entry[1] == "users":
-    #             if entry[2] in data["bookmarks_by_account"].keys():
-    #                 data["bookmarks_by_account"][entry[2]] += 1
-    #             else:
-    #                 data["bookmarks_by_account"][entry[2]] = 1
-    #         else:
-    #             if "user_not_in_url" not in data["bookmarks_by_account"].keys():
-    #                 data["bookmarks_by_account"]['user_not_in_url'] = 1
-    #             else:
-    #                 data["bookmarks_by_account"]['user_not_in_url'] += 1
-
-    #     for key, value in data.items():
-    #         self.data.update({key: value})
-
-    #     self.bookmarks_by_server = data["bookmarks_by_server"]
-    #     self.bookmarks_by_account = data["bookmarks_by_account"]
 
     def extract_bookmarks_per(self):
         bookmarks_per_server = {}

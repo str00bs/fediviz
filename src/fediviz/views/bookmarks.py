@@ -23,7 +23,7 @@ class BookmarksPage:
         rows = int(count / 5)
         grid_numbers = []
 
-        for row in range(0, rows):
+        for _ in range(0, rows):
             columns = [1 for i in range(0, 5)]
             grid_numbers.append(columns)
 
