@@ -1,8 +1,9 @@
 """File contains profile page"""
+
 import streamlit as st
-from utils import StorageUtil, StorageMode
-from streamlit_extras.stylable_container import stylable_container
 from calculations import Actor
+from streamlit_extras.stylable_container import stylable_container
+from utils import StorageMode, StorageUtil
 
 
 class ProfilePage:
@@ -10,13 +11,16 @@ class ProfilePage:
     Shows the user their profile page based on uploaded data
     ! This page can only be displayed after a valid archive is uploaded
     """
+
     actor: Actor
 
     def __init__(self):
         """When class is called, the page is displayed"""
         self.actor = Actor(StorageMode.state)
         st.header(":material/account_circle: Profile", divider=True)
-        with stylable_container("header_container", "{overflow: hidden; max-height: 15vh;}"):
+        with stylable_container(
+            "header_container", "{overflow: hidden; max-height: 15vh;}"
+        ):
             st.image(StorageUtil.get_image("header.jpg", mode="state"))
 
         left_column, right_column = st.columns(2)
@@ -42,13 +46,12 @@ class ProfilePage:
                 label=f"Profile: {self.actor.fedi_url}",
                 url=self.actor.http_url,
                 help="Click open profile on-instance",
-                type="primary"
+                type="primary",
             )
 
         st.header("Summary", divider=True)
 
         st.html(self.actor.summary)
-
 
 
 ProfilePage()

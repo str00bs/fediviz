@@ -1,10 +1,8 @@
 """File contains outbox class, used for extracting & loading data from outbox.json"""
-import json
-from pathlib import Path
+
 import pandas as pd
-import streamlit as st
 from pandas import DataFrame, json_normalize
-from utils import StorageUtil, StorageMode
+from utils import StorageMode, StorageUtil
 
 
 class Outbox:
@@ -70,9 +68,7 @@ class Outbox:
                 "attachment": self.posts["object.attachment"].values,
             }
         )
-        likes_per_post["post"] = likes_per_post["post"].str.replace(
-            "/activity", ""
-        )
+        likes_per_post["post"] = likes_per_post["post"].str.replace("/activity", "")
         self.likes_per_post = likes_per_post
 
     def extract_most_liked_posts(self):

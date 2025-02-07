@@ -1,17 +1,20 @@
 """
 File contains StorageUtil used for managing static files and user uploads
 """
-from enum import Enum
+
 import json
-from typing import List, Any, Literal
+from enum import Enum
+from typing import Any, List
 from zipfile import ZipFile
+
 import streamlit as st
 from config import Config
 
 
 class StorageMode(str, Enum):
     """Decides whether to load from archive or state"""
-    archive = "archive",
+
+    archive = ("archive",)
     state = "state"
 
 

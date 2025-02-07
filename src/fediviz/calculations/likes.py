@@ -1,9 +1,8 @@
 """File contains likes class, used for extracting & loading data from likes.json"""
-from typing import Tuple, List
-import streamlit as st
-from utils import StorageUtil, StorageMode
-from pandas import DataFrame
+
 from collections import Counter
+from pandas import DataFrame
+from utils import StorageMode, StorageUtil
 
 
 class Likes:
@@ -46,29 +45,45 @@ class Likes:
                 continue
 
             likes_per_server.update({server: likes_per_server[server] + 1})
-            likes_per_user.update({f"@{user}@{server}": likes_per_user[f"@{user}@{server}"] + 1})
+            likes_per_user.update(
+                {f"@{user}@{server}": likes_per_user[f"@{user}@{server}"] + 1}
+            )
 
-        self.stats.update({
-            "likes_per_server": likes_per_server,
-            "likes_per_user": likes_per_user,
-            "labelled": {
-                "Unique servers liked": len(likes_per_server.keys()),
-                "Total likes": sum(likes_per_server.values())
+        self.stats.update(
+            {
+                "likes_per_server": likes_per_server,
+                "likes_per_user": likes_per_user,
+                "labelled": {
+                    "Unique servers liked": len(likes_per_server.keys()),
+                    "Total likes": sum(likes_per_server.values()),
+                },
             }
-        })
+        )
 
         # ? Create graph compatible DFs
         self.likes_per_server = DataFrame(
-            data=Counter(self.stats["likes_per_server"]).most_common(len(self.stats["likes_per_server"])),
-            columns=["Server", "Count"]
+            data=Counter(self.stats["likes_per_server"]).most_common(
+                len(self.stats["likes_per_server"])
+            ),
+            columns=["Server", "Count"],
         )
         self.likes_per_user = DataFrame(
-            data=Counter(self.stats["likes_per_user"]).most_common(len(self.stats["likes_per_user"])),
-            columns=["User", "Count"]
+            data=Counter(self.stats["likes_per_user"]).most_common(
+                len(self.stats["likes_per_user"])
+            ),
+            columns=["User", "Count"],
         )
 
     def extract_most_least(self):
-        self.stats["most_liked_server"] = self.likes_per_server.iloc[self.likes_per_server["Count"].idxmax()]["Server"]
-        self.stats["least_liked_server"] = self.likes_per_server.iloc[self.likes_per_server["Count"].idxmin()]["Server"]
-        self.stats["most_liked_user"] = self.likes_per_user.iloc[self.likes_per_user["Count"].idxmax()]["User"]
-        self.stats["least_liked_user"] = self.likes_per_user.iloc[self.likes_per_user["Count"].idxmin()]["User"]
+        self.stats["most_liked_server"] = self.likes_per_server.iloc[
+            self.likes_per_server["Count"].idxmax()
+        ]["Server"]
+        self.stats["least_liked_server"] = self.likes_per_server.iloc[
+            self.likes_per_server["Count"].idxmin()
+        ]["Server"]
+        self.stats["most_liked_user"] = self.likes_per_user.iloc[
+            self.likes_per_user["Count"].idxmax()
+        ]["User"]
+        self.stats["least_liked_user"] = self.likes_per_user.iloc[
+            self.likes_per_user["Count"].idxmin()
+        ]["User"]
