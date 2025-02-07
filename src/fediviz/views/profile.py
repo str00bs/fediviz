@@ -21,14 +21,14 @@ class ProfilePage:
         with stylable_container(
             "header_container", "{overflow: hidden; max-height: 15vh;}"
         ):
-            st.image(StorageUtil.get_image("header.jpg", mode="state"))
+            st.image(StorageUtil.get_image("header", mode="state"))
 
         left_column, right_column = st.columns(2)
 
         with left_column:
             st.html("")
             st.html("")
-            st.image(StorageUtil.get_image("avatar.png", mode="state"))
+            st.image(StorageUtil.get_image("avatar", mode="state"))
         with right_column:
             st.html(f"<h1>{self.actor.name}</h1>")
             st.table(self.actor.tags)

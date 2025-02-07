@@ -30,8 +30,8 @@ class StorageUtil:
         "outbox.json",
     ]
     IMAGE_OPTIONS: List[str] = [
-        "header.jpg",
-        "avatar.png",
+        "header",
+        "avatar",
     ]
     STATE_OPTIONS: List[str] = [
         # ? Toggles
@@ -80,8 +80,14 @@ class StorageUtil:
     def get_image(name: str, mode: StorageMode = StorageMode.archive):
         """Gets image from user archive"""
         if mode == StorageMode.archive:
-            archive = ZipFile(st.session_state.uploaded_file).read(name)
-            return archive
+            archive = ZipFile(st.session_state.uploaded_file)
+
+            full_name: str
+            for item in archive.infolist():
+                if name in item.filename:
+                    full_name = item.filename
+
+            return archive.read(full_name)
         if mode == StorageMode.state:
             return st.session_state[f"images.{name}"]
 
