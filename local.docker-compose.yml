@@ -1,0 +1,16 @@
+services:
+  fediviz:
+    build: .
+    container_name: fediviz
+    restart: unless-stopped
+    networks:
+      - fediviz-net
+    ports: 
+      - "80:80"
+    env_file:
+      - dist.env
+
+networks:
+  fediviz-net:
+    name: fediviz-net
+    external: false
