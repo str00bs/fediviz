@@ -1,6 +1,7 @@
 """File contains likes class, used for extracting & loading data from likes.json"""
 
 from collections import Counter
+
 from pandas import DataFrame
 from utils import StorageMode, StorageUtil
 
