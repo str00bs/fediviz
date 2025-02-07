@@ -39,6 +39,7 @@ class _config:
         # ? Files
         self.LICENSE = self.STATIC_DIR.joinpath(getenv("LICENSE"))
         self.PRIVACY = self.STATIC_DIR.joinpath(getenv("PRIVACY"))
+        self.DOCS = self.STATIC_DIR.joinpath(getenv("README"))
 
 
 Config = _config()

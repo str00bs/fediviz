@@ -101,7 +101,10 @@ class StorageUtil:
     def load_extras():
         """Loads the privacy and license files from disk to state"""
         with open(Config.LICENSE) as license_file:
-            st.session_state[f"files.LICENSE.md"] = license_file.read()
+            st.session_state["files.LICENSE.md"] = license_file.read()
 
         with open(Config.PRIVACY) as privacy_file:
-            st.session_state[f"files.PRIVACY.md"] = privacy_file.read()
+            st.session_state["files.PRIVACY.md"] = privacy_file.read()
+
+        with open(Config.DOCS) as config_file:
+            st.session_state["files.README.md"] = config_file.read()
