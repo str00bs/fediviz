@@ -32,9 +32,9 @@ if __name__ == "__main__":
     # ? Define Views
     resources_views = {
         "Resources": [
+            st.Page("views/docs.py", title="Docs", url_path="docs", icon=":material/support:"),
             st.Page("views/license.py", title="License", url_path="license", icon=":material/license:"),
             st.Page("views/privacy.py", title="Privacy", url_path="privacy", icon=":material/visibility_off:"),
-            st.Page("views/docs.py", title="Docs", url_path="docs", icon=":material/support:")
         ]
     }
     welcome_views = {
