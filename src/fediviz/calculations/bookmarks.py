@@ -1,4 +1,7 @@
-"""File contains bookmarks class, used for extracting & loading data from bookmarks.json"""
+"""
+File contains bookmarks class,
+used for extracting & loading data from bookmarks.json
+"""
 
 from collections import Counter
 

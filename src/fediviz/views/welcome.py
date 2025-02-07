@@ -82,11 +82,11 @@ class WelcomePage:
                 st.subheader("Request your followers/follows", divider=True)
                 st.markdown(
                     """
-                        These are not included in the export by default, so if we want to show these metrics,
-                        we have to try to ask your server if they can share that data with us.
+                    These are not included in the export by default, so if we want to show these metrics,
+                    we have to try to ask your server if they can share that data with us.
 
-                        This is done with a lookup request to your server asking for your followers/follows
-                        """
+                    This is done with a lookup request to your server asking for your followers/follows
+                    """  # noqa
                 )
                 if st.session_state["welcome.user_url"] is not None:
                     if st.button(
@@ -126,7 +126,7 @@ class WelcomePage:
                                 st.rerun()
                         else:
                             st.error(
-                                "Could not lookup that combination of Server URL and username",
+                                "Could not lookup that combination of Server URL and username",  # noqa
                                 icon="❌",
                             )
                 else:
