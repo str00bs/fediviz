@@ -1,20 +1,20 @@
 """File contains app config"""
 from pathlib import Path
-from os import getenv, environ
+from os import getenv
 from dotenv import load_dotenv
 
 
 class _config:
     """Contains app config"""
-    # ? Images
+    # ? General
+    REPO_URL: str
     STATIC_DIR: Path
+
+    # ? Images
     FAVICON: Path
     LOGO: Path
     GITHUB_LOGO: Path
     MASTODON_LOGO: Path
-
-    # ? Links
-    GITHUB_URL: Path
 
     # ? Files
     LICENSE: str
@@ -23,23 +23,20 @@ class _config:
     def __init__(self):
         load_dotenv()
 
-        # ? Images
+        # ? General
+        self.REPO_URL = getenv("REPO_URL")
         self.STATIC_DIR = Path(getenv("STATIC_DIR"))
+
+        # ? Images
         self.FAVICON = self.STATIC_DIR.joinpath(getenv('FAVICON'))
         self.LOGO = self.STATIC_DIR.joinpath(getenv('LOGO'))
-        self.GITHUB_LOGO = self.STATIC_DIR.joinpath(getenv('GITHUB_LOGO'))
-        self.MASTODON_LOGO = self.STATIC_DIR.joinpath(getenv('MASTODON_LOGO'))
-
-        # ? Links
-        self.GITHUB_URL = getenv("GITHUB_URL")
-
-        # ? Toggles
-        self.DEBUGGING = getenv("DEBUGGING")
+        self.GITHUB_LOGO = self.STATIC_DIR.joinpath("github.png")
+        self.MASTODON_LOGO = self.STATIC_DIR.joinpath("mastodon.png")
 
         # ? Files
-        self.LICENSE = self.STATIC_DIR.joinpath(getenv("LICENSE"))
-        self.PRIVACY = self.STATIC_DIR.joinpath(getenv("PRIVACY"))
-        self.DOCS = self.STATIC_DIR.joinpath(getenv("README"))
+        self.LICENSE = self.STATIC_DIR.joinpath("LICENSE.md")
+        self.PRIVACY = self.STATIC_DIR.joinpath("PRIVACY.md")
+        self.DOCS = self.STATIC_DIR.joinpath("README.md")
 
 
 Config = _config()
