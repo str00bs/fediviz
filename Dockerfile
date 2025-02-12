@@ -4,7 +4,6 @@ FROM python:3.13-slim
 COPY src/ /app
 COPY pyproject.toml /app/pyproject.toml
 COPY dist.env /app/.env
-COPY dist.config.toml /app/.streamlit/config.toml
 COPY LICENSE.md PRIVACY.md README.md /app/
 COPY LICENSE.md PRIVACY.md README.md /app/fediviz/static/
 
