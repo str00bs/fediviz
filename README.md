@@ -35,14 +35,3 @@ TODO: Write resources overview, so that people may learn the used tools.
 
 ### Credits
 TODO: Filter and include the credits here, once it's clear which assets will be used.
-
-## Housekeeping
-A list of non-urgent TODO's
-1. Setup badges
-2. ~~Activate deepsource~~
-3. Activate dependabot
-4. Activate securitybot
-5. ~~Run static analysis~~
-6. Make first release for github and dockerhub
-7. ~~Add VSC helpers.~~
-8. Write tests.

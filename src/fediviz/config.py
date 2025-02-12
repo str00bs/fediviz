@@ -2,44 +2,77 @@
 
 from os import getenv
 from pathlib import Path
+from typing import Union
 
-from dotenv import load_dotenv
+from pydantic import Field, HttpUrl
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class _config:
-    """Contains app config"""
+class appConfig(BaseSettings):
+    """Contains config for the App itself"""
+
+    model_config = SettingsConfigDict(env_prefix="APP_")
 
     # ? General
-    REPO_URL: str
-    STATIC_DIR: Path
+    REPO_URL: HttpUrl = Field("https://github.com/str00bs/fediviz")
+    STATIC_DIR: Path = Field("fediviz/static")
 
     # ? Images
-    FAVICON: Path
-    LOGO: Path
-    GITHUB_LOGO: Path
-    MASTODON_LOGO: Path
+    FAVICON: Union[Path, str] = Field("strawberry.png")
+    LOGO: Union[Path, str] = Field("strawberry.png")
+    GITHUB_LOGO: Union[Path, str] = Field("github.png")
+    MASTODON_LOGO: Union[Path, str] = Field("mastodon.png")
 
     # ? Files
-    LICENSE: str
-    PRIVACY: str
+    LICENSE: Union[Path, str] = Field("LICENSE.md")
+    PRIVACY: Union[Path, str] = Field("PRIVACY.md")
+    DOCS: Union[Path, str] = Field("README.md")
 
     def __init__(self):
-        load_dotenv()
-
-        # ? General
-        self.REPO_URL = getenv("REPO_URL")
-        self.STATIC_DIR = Path(getenv("STATIC_DIR"))
+        super(appConfig, self).__init__()
 
         # ? Images
-        self.FAVICON = self.STATIC_DIR.joinpath(getenv("FAVICON"))
-        self.LOGO = self.STATIC_DIR.joinpath(getenv("LOGO"))
-        self.GITHUB_LOGO = self.STATIC_DIR.joinpath("github.png")
-        self.MASTODON_LOGO = self.STATIC_DIR.joinpath("mastodon.png")
+        self.FAVICON = self.STATIC_DIR.joinpath(self.FAVICON)
+        self.LOGO = self.STATIC_DIR.joinpath(self.LOGO)
+        self.GITHUB_LOGO = self.STATIC_DIR.joinpath(self.GITHUB_LOGO)
+        self.MASTODON_LOGO = self.STATIC_DIR.joinpath(self.MASTODON_LOGO)
 
         # ? Files
-        self.LICENSE = self.STATIC_DIR.joinpath("LICENSE.md")
-        self.PRIVACY = self.STATIC_DIR.joinpath("PRIVACY.md")
-        self.DOCS = self.STATIC_DIR.joinpath("README.md")
+        self.LICENSE = self.STATIC_DIR.joinpath(self.LICENSE)
+        self.PRIVACY = self.STATIC_DIR.joinpath(self.PRIVACY)
+        self.DOCS = self.STATIC_DIR.joinpath(self.DOCS)
 
 
-Config = _config()
+class stConfig(BaseSettings):
+    """
+    Contains config for Streamlit
+    This is required, as they do not support `.env`
+    and `config.toml`cannot be used with deployments.
+    """
+
+    model_config = SettingsConfigDict(env_prefix="ST_")
+
+    # ? Global variables
+    STREAMLIT_GLOBAL_DEVELOPMENT_MODE: bool = False
+
+    # ? Server variables
+    STREAMLIT_SERVER_HOST: str = Field("localhost")
+    STREAMLIT_SERVER_PORT: int = Field(80)
+    STREAMLIT_SERVER_MAX_UPLOAD_SIZE: int = Field(1000)
+    STREAMLIT_SERVER_ENABLE_STATIC_SERVING: bool = Field(True)
+
+    # ? Browser variables
+    STREAMLIT_BROWSER_SERVER_ADDRESS: str = Field("localhost")
+    STREAMLIT_BROWSER_SERVER_PORT: int = Field(80)
+    STREAMLIT_BROWSER_GATHER_USAGE_STATS: bool = Field(False)
+
+    # ? Theme variables
+    STREAMLIT_THEME_BASE: str = Field("dark")
+    STREAMLIT_THEME_PRIMARY_COLOR: str = Field("#5c49e1")
+    STREAMLIT_THEME_BACKGROUND_COLOR: str = Field("#0E1117")
+    STREAMLIT_THEME_SECONDARY_BACKGROUND_COLOR: str = Field("#373e75")
+    STREAMLIT_THEME_TEXT_COLOR: str = Field("#FAFAFA")
+
+
+Config = appConfig()
+STConfig = stConfig()
