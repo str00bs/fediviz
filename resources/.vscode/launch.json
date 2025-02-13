@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Run",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src",
+            "module": "streamlit",
+            "args": [
+                "run",
+                "fediviz/__main__.py",
+            ]
+        },
+    ]
+}
