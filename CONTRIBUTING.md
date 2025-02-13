@@ -1,4 +1,4 @@
-# Contribution Guide
+# 🤝 Contribution Guide
 Thank you for your interest in contributing to FediViz, in this document you can find guidelines for how to do so.
 
 Before starting, it's recommended you check out the **Resources** section of our [docs](./README.md#resources) as these include information about the tools and libraries used, alongside helper files for getting you started.
