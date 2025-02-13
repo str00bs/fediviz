@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.debugpy",
+        "ms-python.flake8",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml",
+        "aaron-bond.better-comments",
+        "vivaxy.vscode-conventional-commits",
+        "yzhang.markdown-all-in-one",
+    ]
+}
