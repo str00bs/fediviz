@@ -5,11 +5,13 @@
             "type": "debugpy",
             "request": "launch",
             "cwd": "${workspaceFolder}/src",
+            "envFile": "${workspaceFolder}/.env",
             "module": "streamlit",
             "args": [
                 "run",
                 "fediviz/__main__.py",
-            ]
+            ],
+            
         },
     ]
 }
