@@ -22,9 +22,7 @@ class WelcomePage:
         with stylable_container("WelcomePage.body", Styles.welcome["container"]):
             with st.expander("Step 1/3: Request your export", expanded=True):
                 st.subheader("Request your export", divider=True)
-                st.image(
-                    "/Users/ada/Documents/code/fediviz/src/fediviz/static/undraw-my-files.png"
-                )
+                st.image(StorageUtil.get_image("welcome.step-1", "state"))
                 st.markdown(
                     """
                     1. Go to your mastodon instance
@@ -62,9 +60,7 @@ class WelcomePage:
 
             with st.expander("Step 2/3: Upload your archive"):
                 st.subheader("Upload your archive", divider=True)
-                st.image(
-                    "/Users/ada/Documents/code/fediviz/src/fediviz/static/undraw-upload.png",
-                )
+                st.image(StorageUtil.get_image("welcome.step-2", "state"))
                 result = st.file_uploader(
                     label="Upload your `export.zip`", key="uploaded_file"
                 )
@@ -83,9 +79,7 @@ class WelcomePage:
 
             with st.expander("Optional[Step 3/3]: Request your followers/follows"):
                 st.subheader("Request your followers/follows", divider=True)
-                st.image(
-                    "/Users/ada/Documents/code/fediviz/src/fediviz/static/undraw-folder-files.png"
-                )
+                st.image(StorageUtil.get_image("welcome.step-3", "state"))
                 st.markdown(
                     """
                     These are not included in the export by default, so if we want to show these metrics,

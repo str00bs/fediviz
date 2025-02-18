@@ -4,7 +4,7 @@ File contains StorageUtil used for managing static files and user uploads
 
 import json
 from enum import Enum
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from zipfile import ZipFile
 
 import streamlit as st
@@ -41,6 +41,9 @@ class StorageUtil:
     ]
     IMAGE_DEFAULTS: Dict = {
         "avatar": Config.AVATAR,
+        "welcome.step-1": Config.STATIC_DIR.joinpath("undraw-my-files.png"),
+        "welcome.step-2": Config.STATIC_DIR.joinpath("undraw-upload.png"),
+        "welcome.step-3": Config.STATIC_DIR.joinpath("undraw-folder-files.png"),
     }
     STATE_OPTIONS: List[str] = [
         # ? Toggles
@@ -88,6 +91,8 @@ class StorageUtil:
         if mode == StorageMode.state:
             return st.session_state[f"files.{name}"]
 
+        raise FileNotFoundError(f"name: {name}, mode: {mode}")
+
     @staticmethod
     def get_image(name: str, mode: StorageMode = StorageMode.archive):
         """Retrieves named image from storage based on mode."""
@@ -95,7 +100,7 @@ class StorageUtil:
             case StorageMode.archive:
                 archive = ZipFile(st.session_state.uploaded_file)
 
-                full_name: str = None
+                full_name: Optional[str] = None
 
                 for item in archive.infolist():
                     if name in item.filename:
@@ -106,7 +111,9 @@ class StorageUtil:
                 raise FileNotFoundError(f"name: {name}, mode: {mode}")
 
             case StorageMode.state:
-                if image := st.session_state[f"images.{name}"]:
+                if image := st.session_state.get(f"images.{name}", None):
+                    return image
+                if image := st.session_state.get(f"defaults.{name}", None):
                     return image
                 raise FileNotFoundError(f"name: {name}, mode: {mode}")
 
