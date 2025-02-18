@@ -6,6 +6,7 @@ import plotly.express as px
 import streamlit as st
 from calculations import Bookmarks
 from streamlit_extras.grid import grid
+from styles import Styles
 from utils import StorageMode
 
 
@@ -16,32 +17,6 @@ class BookmarksPage:
     """
 
     bookmarks: Bookmarks
-    css_expander = """
-        <style>
-            div[data-testid="stExpander"] details {
-                background-color: #292938;
-                border-radius: 20px;
-                border: none;
-            }
-            div[data-testid="stMetric"] {
-                border-radius: 20px;
-                padding: 20px;
-                border: 1px solid #0D1117;
-                background-color: #373E75;
-            }
-            .main-svg {
-                border-radius: 20px;
-            }
-            p {
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-            p:hover {
-                white-space: pre-line;
-            }
-        <style>
-    """
 
     def most_bookmarked_grid(self, who: str = "server", count: int = 5):
         col_number = 0
@@ -64,7 +39,7 @@ class BookmarksPage:
         """When class is called, the page is displayed"""
         self.bookmarks = Bookmarks(StorageMode.state)
         st.header("Your Bookmark :material/bookmark: stats", divider=True)
-        st.markdown(self.css_expander, True)
+        st.markdown(Styles.bookmarks, True)
 
         with st.expander("Totals", expanded=True):
             column_number = 0

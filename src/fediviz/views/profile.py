@@ -4,6 +4,7 @@ import streamlit as st
 from calculations import Actor
 from components import show_banner
 from streamlit_extras.stylable_container import stylable_container
+from styles import Styles
 from utils import StorageMode, StorageUtil
 
 
@@ -14,13 +15,6 @@ class ProfilePage:
     """
 
     actor: Actor
-    css = """
-        [data-testid="stImageContainer"] img {
-            border-radius: 10%;
-            width: 20vw;
-            margin-top: 50px;
-        }
-    """
 
     def __init__(self):
         """When class is called, the page is displayed"""
@@ -34,7 +28,7 @@ class ProfilePage:
             try:  # ? To get the avatar
                 with stylable_container(
                     "profile-avatar-container",
-                    self.css,
+                    Styles.profile,
                 ):
                     st.image(StorageUtil.get_image("avatar", mode=StorageMode.state))
             except FileNotFoundError:
