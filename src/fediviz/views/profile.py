@@ -2,7 +2,7 @@
 
 import streamlit as st
 from calculations import Actor
-from components import show_header
+from components import show_banner
 from streamlit_extras.stylable_container import stylable_container
 from utils import StorageMode, StorageUtil
 
@@ -19,7 +19,7 @@ class ProfilePage:
         """When class is called, the page is displayed"""
         self.actor = Actor(StorageMode.state)
         st.header(":material/account_circle: Profile", divider=True)
-        show_header(key="profile-header-container")
+        show_banner(key="profile-header-container")
 
         left_column, right_column = st.columns(2)
 
