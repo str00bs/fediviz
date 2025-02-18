@@ -14,6 +14,13 @@ class ProfilePage:
     """
 
     actor: Actor
+    css = """
+        [data-testid="stImageContainer"] img {
+            border-radius: 10%;
+            width: 20vw;
+            margin-top: 50px;
+        }
+    """
 
     def __init__(self):
         """When class is called, the page is displayed"""
@@ -27,7 +34,7 @@ class ProfilePage:
             try:  # ? To get the avatar
                 with stylable_container(
                     "profile-avatar-container",
-                    "img {border-radius: 10%; width: 20vw; margin-top: 50px;}",
+                    self.css,
                 ):
                     st.image(StorageUtil.get_image("avatar", mode=StorageMode.state))
             except FileNotFoundError:
