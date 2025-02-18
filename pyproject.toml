@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Privacy friendly data visualization tool for mastodon "
 authors = ["Ada <github@adapdr.me>"]
 readme = "README.md"
-packages = [{include = "fediviz", from = "src"}]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
