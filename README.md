@@ -1,6 +1,5 @@
 # 📊 FediViz
 [![Build Status](https://ci.cloud.adapdr.me/api/badges/str00bs/fediviz/status.svg?ref=refs/heads/main)](https://ci.cloud.adapdr.me/str00bs/fediviz)
-[![Build Status](https://ci.cloud.adapdr.me/api/badges/str00bs/fediviz/status.svg?ref=refs/heads/ci_tmp)](https://ci.cloud.adapdr.me/str00bs/fediviz)
 Is a free, open-source and privacy first visualisation tool, that is purpose-built for Mastodon utilizing user exports.
 - 👱 Account overview with highlights & stats from your page.
 - 📑 Bookmarks page with granular breakdown of available stats & metrics
