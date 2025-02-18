@@ -11,18 +11,30 @@ class WelcomePage:
     """Welcomes the user and provides instructions for usage"""
 
     actor: Actor
+    css_container = """
+        [data-testid="stText"] div{
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+    """
+    css_expander = """
+        <style>
+            div[data-testid="stExpander"] details {
+                background-color: #292938;
+                border-radius: 20px;
+                border: none;
+            },
+        <style>
+    """
 
     def __init__(self):
         """When class is called, the page is displayed"""
-        css = """
-            [data-testid="stText"] div{
-                display: flex;
-                justify-content: flex-end;
-                width: 100%;
-            }
-            """
+        st.markdown(
+            self.css_expander, True
+        )  # ? This removes borders for the whole page
 
-        with stylable_container("WelcomePage.body", css):
+        with stylable_container("WelcomePage.body", self.css_container):
             with st.expander("Step 1/3: Request your export", expanded=True):
                 st.subheader("Request your export", divider=True)
                 st.image(
