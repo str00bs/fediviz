@@ -4,6 +4,7 @@ import streamlit as st
 from calculations import Actor
 from config import Config
 from streamlit_extras.stylable_container import stylable_container
+from styles import Styles
 from utils import StorageUtil, WebUtil
 
 
@@ -14,17 +15,14 @@ class WelcomePage:
 
     def __init__(self):
         """When class is called, the page is displayed"""
-        css = """
-            [data-testid="stText"] div{
-                display: flex;
-                justify-content: flex-end;
-                width: 100%;
-            }
-            """
+        st.markdown(
+            Styles.welcome["expander"], True
+        )  # ? This removes borders for the whole page
 
-        with stylable_container("WelcomePage.body", css):
+        with stylable_container("WelcomePage.body", Styles.welcome["container"]):
             with st.expander("Step 1/3: Request your export", expanded=True):
                 st.subheader("Request your export", divider=True)
+                st.image(StorageUtil.get_image("welcome.step-1", "state"))
                 st.markdown(
                     """
                     1. Go to your mastodon instance
@@ -62,6 +60,7 @@ class WelcomePage:
 
             with st.expander("Step 2/3: Upload your archive"):
                 st.subheader("Upload your archive", divider=True)
+                st.image(StorageUtil.get_image("welcome.step-2", "state"))
                 result = st.file_uploader(
                     label="Upload your `export.zip`", key="uploaded_file"
                 )
@@ -80,6 +79,7 @@ class WelcomePage:
 
             with st.expander("Optional[Step 3/3]: Request your followers/follows"):
                 st.subheader("Request your followers/follows", divider=True)
+                st.image(StorageUtil.get_image("welcome.step-3", "state"))
                 st.markdown(
                     """
                     These are not included in the export by default, so if we want to show these metrics,

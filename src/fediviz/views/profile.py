@@ -2,7 +2,9 @@
 
 import streamlit as st
 from calculations import Actor
+from components import show_banner
 from streamlit_extras.stylable_container import stylable_container
+from styles import Styles
 from utils import StorageMode, StorageUtil
 
 
@@ -18,17 +20,20 @@ class ProfilePage:
         """When class is called, the page is displayed"""
         self.actor = Actor(StorageMode.state)
         st.header(":material/account_circle: Profile", divider=True)
-        with stylable_container(
-            "header_container", "{overflow: hidden; max-height: 15vh;}"
-        ):
-            st.image(StorageUtil.get_image("header", mode="state"))
+        show_banner(key="profile-header-container")
 
         left_column, right_column = st.columns(2)
 
         with left_column:
-            st.html("")
-            st.html("")
-            st.image(StorageUtil.get_image("avatar", mode="state"))
+            try:  # ? To get the avatar
+                with stylable_container(
+                    "profile-avatar-container",
+                    Styles.profile,
+                ):
+                    st.image(StorageUtil.get_image("avatar", mode=StorageMode.state))
+            except FileNotFoundError:
+                pass
+
         with right_column:
             st.html(f"<h1>{self.actor.name}</h1>")
             st.table(self.actor.tags)
@@ -42,6 +47,7 @@ class ProfilePage:
                     st.metric("Follwing", st.session_state["user.following_count"])
             else:
                 st.text("No followers/follows loaded")
+
             st.link_button(
                 label=f"Profile: {self.actor.fedi_url}",
                 url=self.actor.http_url,

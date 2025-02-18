@@ -6,6 +6,7 @@ import plotly.express as px
 import streamlit as st
 from calculations import Likes
 from streamlit_extras.grid import grid
+from styles import Styles
 from utils import StorageMode
 
 
@@ -37,8 +38,9 @@ class LikesPage:
     def __init__(self):
         """When class is called, the page is displayed"""
         self.likes = Likes(StorageMode.state)
-
+        st.markdown(Styles.likes, True)
         st.header("Your Like :material/thumb_up: stats", divider=True)
+
         with st.expander("Totals", expanded=True):
             column_number = 0
             columns = st.columns(self.likes.stats["labelled"].__len__())
@@ -67,7 +69,8 @@ class LikesPage:
                 title=f"Seems like {favourite} is your favourite 🌐 💕",
                 subtitle=f"...but hope you don't forget about {least} 😪",
             )
-            st.plotly_chart(fig)
+            fig.update_layout({"paper_bgcolor": "#373E75"})
+            st.plotly_chart(fig, theme=None)
             self.most_liked_grid("server", count)
 
         with st.expander("User stats"):
@@ -91,7 +94,8 @@ class LikesPage:
                 title=f"Seems like {favourite} is your favourite 🧑 💕",
                 subtitle=f"...but hope you don't forget about {least} 😪",
             )
-            st.plotly_chart(fig)
+            fig.update_layout({"paper_bgcolor": "#373E75"})
+            st.plotly_chart(fig, theme=None)
             self.most_liked_grid("user", count)
 
 

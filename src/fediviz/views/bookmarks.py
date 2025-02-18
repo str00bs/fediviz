@@ -6,8 +6,8 @@ import plotly.express as px
 import streamlit as st
 from calculations import Bookmarks
 from streamlit_extras.grid import grid
-from streamlit_extras.stylable_container import stylable_container
-from utils import StorageMode, StorageUtil
+from styles import Styles
+from utils import StorageMode
 
 
 class BookmarksPage:
@@ -39,10 +39,7 @@ class BookmarksPage:
         """When class is called, the page is displayed"""
         self.bookmarks = Bookmarks(StorageMode.state)
         st.header("Your Bookmark :material/bookmark: stats", divider=True)
-        with stylable_container(
-            "header_container", "{overflow: hidden; max-height: 15vh;}"
-        ):
-            st.image(StorageUtil.get_image("header.jpg", mode="state"))
+        st.markdown(Styles.bookmarks, True)
 
         with st.expander("Totals", expanded=True):
             column_number = 0
@@ -72,6 +69,7 @@ class BookmarksPage:
                 title=f"Seems like {favourite} is where it's interesting 🔍",
                 subtitle=f"but posts on {least} are still worth checking out 🏃",
             )
+            fig.update_layout({"paper_bgcolor": "#373E75"})
             st.plotly_chart(fig)
             self.most_bookmarked_grid("server", count)
 
@@ -96,6 +94,7 @@ class BookmarksPage:
                 title=f"For you, posts by {favourite} is worth saving 💾",
                 subtitle=f"...but still you still read posts from {least} 👓",
             )
+            fig.update_layout({"paper_bgcolor": "#373E75"})
             st.plotly_chart(fig)
             self.most_bookmarked_grid("user", count)
 
