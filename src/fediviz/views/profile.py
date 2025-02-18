@@ -19,15 +19,15 @@ class ProfilePage:
         """When class is called, the page is displayed"""
         self.actor = Actor(StorageMode.state)
         st.header(":material/account_circle: Profile", divider=True)
-        show_header(key="profile.header-container")
+        show_header(key="profile-header-container")
 
         left_column, right_column = st.columns(2)
 
         with left_column:
             try:  # ? To get the avatar
                 with stylable_container(
-                    "profile.avatar-container",
-                    "img {border-radius: 50%; width: 20vw; margin-top: 50px;}",
+                    "profile-avatar-container",
+                    "img {border-radius: 10%; width: 20vw; margin-top: 50px;}",
                 ):
                     st.image(StorageUtil.get_image("avatar", mode=StorageMode.state))
             except FileNotFoundError:
