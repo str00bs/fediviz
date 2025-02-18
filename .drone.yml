@@ -11,7 +11,12 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
+  when:
+    refs:
+    - refs/heads/main
+    - refs/tags/**
+
 trigger:
-  refs:
-  - refs/heads/main
-  - refs/tags/**
+  event:
+  - push
+
