@@ -1,0 +1,23 @@
+kind: pipeline
+name: Build & Push 
+
+steps:
+- name: docker  
+  image: plugins/docker
+  auto_tag: true
+  settings:
+    repo: str00bs/fediviz
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+  when:
+    refs:
+    - refs/heads/main
+    - refs/tags/**
+    event:
+    - tag
+trigger:
+  event:
+  - tag
+
