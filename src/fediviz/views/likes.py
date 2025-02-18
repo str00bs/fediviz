@@ -16,6 +16,21 @@ class LikesPage:
     """
 
     likes: Likes
+    css_expander = """
+        <style>
+            div[data-testid="stExpander"] details {
+                background-color: #292938;
+                border-radius: 20px;
+                border: none;
+            }
+            div[data-testid="stMetric"] {
+                border-radius: 20px;
+                padding: 20px;
+                border: 1px solid #0D1117;
+                background-color: #373E75;
+            }
+        <style>
+    """
 
     def most_liked_grid(self, who: str = "server", count: int = 5):
         col_number = 0
@@ -37,7 +52,7 @@ class LikesPage:
     def __init__(self):
         """When class is called, the page is displayed"""
         self.likes = Likes(StorageMode.state)
-
+        st.markdown(self.css_expander, True)
         st.header("Your Like :material/thumb_up: stats", divider=True)
         with st.expander("Totals", expanded=True):
             column_number = 0
@@ -60,6 +75,14 @@ class LikesPage:
             favourite = self.likes.stats["most_liked_server"]
             least = self.likes.stats["least_liked_server"]
 
+            css = """
+            <style>
+            .main-svg {
+                border-radius: 20px;
+            }
+            </style>
+            """
+            st.markdown(css, True)
             fig = px.pie(
                 data_frame=self.likes.likes_per_server.head(count),
                 names="Server",
@@ -67,7 +90,8 @@ class LikesPage:
                 title=f"Seems like {favourite} is your favourite 🌐 💕",
                 subtitle=f"...but hope you don't forget about {least} 😪",
             )
-            st.plotly_chart(fig)
+            fig.update_layout({"paper_bgcolor": "#373E75"})
+            st.plotly_chart(fig, theme=None)
             self.most_liked_grid("server", count)
 
         with st.expander("User stats"):
@@ -91,7 +115,8 @@ class LikesPage:
                 title=f"Seems like {favourite} is your favourite 🧑 💕",
                 subtitle=f"...but hope you don't forget about {least} 😪",
             )
-            st.plotly_chart(fig)
+            fig.update_layout({"paper_bgcolor": "#373E75"})
+            st.plotly_chart(fig, theme=None)
             self.most_liked_grid("user", count)
 
 
