@@ -5,8 +5,8 @@ steps:
 - name: docker  
   image: plugins/docker
   tags:
-  - latest
   - ${DRONE_TAG}
+  - latest
   settings:
     repo: str00bs/fediviz
     username:
