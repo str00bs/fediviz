@@ -2,7 +2,7 @@
 
 import streamlit as st
 
-css_component = """
+css = """
     <style>
         div[data-testid="stMarkdown"] {
             background-color: #292938;
@@ -16,6 +16,4 @@ css_component = """
 def show_license():
     """Reuseable license component"""
 
-    st.markdown(
-        css_component + st.session_state["files.LICENSE.md"], unsafe_allow_html=True
-    )
+    st.markdown(css + st.session_state["files.LICENSE.md"], unsafe_allow_html=True)
