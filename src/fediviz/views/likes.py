@@ -29,6 +29,17 @@ class LikesPage:
                 border: 1px solid #0D1117;
                 background-color: #373E75;
             }
+            .main-svg {
+                border-radius: 20px;
+            }
+            p {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            p:hover {
+                white-space: pre-line;
+            }
         <style>
     """
 
@@ -54,6 +65,7 @@ class LikesPage:
         self.likes = Likes(StorageMode.state)
         st.markdown(self.css_expander, True)
         st.header("Your Like :material/thumb_up: stats", divider=True)
+
         with st.expander("Totals", expanded=True):
             column_number = 0
             columns = st.columns(self.likes.stats["labelled"].__len__())
@@ -75,14 +87,6 @@ class LikesPage:
             favourite = self.likes.stats["most_liked_server"]
             least = self.likes.stats["least_liked_server"]
 
-            css = """
-            <style>
-            .main-svg {
-                border-radius: 20px;
-            }
-            </style>
-            """
-            st.markdown(css, True)
             fig = px.pie(
                 data_frame=self.likes.likes_per_server.head(count),
                 names="Server",
