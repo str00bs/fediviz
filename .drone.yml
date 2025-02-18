@@ -15,8 +15,9 @@ steps:
     refs:
     - refs/heads/main
     - refs/tags/**
-
+    event:
+    - tag
 trigger:
   event:
-  - push
+  - tag
 
