@@ -6,8 +6,7 @@ import plotly.express as px
 import streamlit as st
 from calculations import Bookmarks
 from streamlit_extras.grid import grid
-from streamlit_extras.stylable_container import stylable_container
-from utils import StorageMode, StorageUtil
+from utils import StorageMode
 
 
 class BookmarksPage:
@@ -39,10 +38,6 @@ class BookmarksPage:
         """When class is called, the page is displayed"""
         self.bookmarks = Bookmarks(StorageMode.state)
         st.header("Your Bookmark :material/bookmark: stats", divider=True)
-        with stylable_container(
-            "header_container", "{overflow: hidden; max-height: 15vh;}"
-        ):
-            st.image(StorageUtil.get_image("header.jpg", mode="state"))
 
         with st.expander("Totals", expanded=True):
             column_number = 0

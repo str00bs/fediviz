@@ -20,6 +20,7 @@ class appConfig(BaseSettings):
     # ? Images
     FAVICON: Union[Path, str] = Field("strawberry.png")
     LOGO: Union[Path, str] = Field("strawberry.png")
+    AVATAR: Union[Path, str] = Field("defaults/avatar.png")
     GITHUB_LOGO: Union[Path, str] = Field("github.png")
     MASTODON_LOGO: Union[Path, str] = Field("mastodon.png")
 
@@ -29,11 +30,13 @@ class appConfig(BaseSettings):
     DOCS: Union[Path, str] = Field("README.md")
 
     def __init__(self):
+        """Sets relative path for each static variable"""
         super(appConfig, self).__init__()
 
         # ? Images
         self.FAVICON = self.STATIC_DIR.joinpath(self.FAVICON)
         self.LOGO = self.STATIC_DIR.joinpath(self.LOGO)
+        self.AVATAR = self.STATIC_DIR.joinpath(self.AVATAR)
         self.GITHUB_LOGO = self.STATIC_DIR.joinpath(self.GITHUB_LOGO)
         self.MASTODON_LOGO = self.STATIC_DIR.joinpath(self.MASTODON_LOGO)
 
@@ -44,13 +47,9 @@ class appConfig(BaseSettings):
 
 
 class stConfig(BaseSettings):
-    """
-    Contains config for Streamlit
-    This is required, as they do not support `.env`
-    and `config.toml`cannot be used with deployments.
-    """
+    """Contains config for Streamlit"""
 
-    model_config = SettingsConfigDict(env_prefix="ST_")
+    model_config = SettingsConfigDict(env_prefix="STREAMLIT_")
 
     # ? Global variables
     STREAMLIT_GLOBAL_DEVELOPMENT_MODE: bool = False
