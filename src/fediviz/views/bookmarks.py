@@ -16,6 +16,32 @@ class BookmarksPage:
     """
 
     bookmarks: Bookmarks
+    css_expander = """
+        <style>
+            div[data-testid="stExpander"] details {
+                background-color: #292938;
+                border-radius: 20px;
+                border: none;
+            }
+            div[data-testid="stMetric"] {
+                border-radius: 20px;
+                padding: 20px;
+                border: 1px solid #0D1117;
+                background-color: #373E75;
+            }
+            .main-svg {
+                border-radius: 20px;
+            }
+            p {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            p:hover {
+                white-space: pre-line;
+            }
+        <style>
+    """
 
     def most_bookmarked_grid(self, who: str = "server", count: int = 5):
         col_number = 0
@@ -38,6 +64,7 @@ class BookmarksPage:
         """When class is called, the page is displayed"""
         self.bookmarks = Bookmarks(StorageMode.state)
         st.header("Your Bookmark :material/bookmark: stats", divider=True)
+        st.markdown(self.css_expander, True)
 
         with st.expander("Totals", expanded=True):
             column_number = 0
@@ -67,6 +94,7 @@ class BookmarksPage:
                 title=f"Seems like {favourite} is where it's interesting 🔍",
                 subtitle=f"but posts on {least} are still worth checking out 🏃",
             )
+            fig.update_layout({"paper_bgcolor": "#373E75"})
             st.plotly_chart(fig)
             self.most_bookmarked_grid("server", count)
 
@@ -91,6 +119,7 @@ class BookmarksPage:
                 title=f"For you, posts by {favourite} is worth saving 💾",
                 subtitle=f"...but still you still read posts from {least} 👓",
             )
+            fig.update_layout({"paper_bgcolor": "#373E75"})
             st.plotly_chart(fig)
             self.most_bookmarked_grid("user", count)
 
