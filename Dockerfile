@@ -2,9 +2,8 @@ FROM python:3.13-slim
 
 # ? Setup application directory
 COPY src/ /app
-COPY pyproject.toml /app/pyproject.toml
 COPY dist.env /app/.env
-COPY LICENSE.md PRIVACY.md README.md /app/
+COPY pyproject.toml poetry.lock LICENSE.md PRIVACY.md README.md /app/
 COPY LICENSE.md PRIVACY.md README.md /app/fediviz/static/
 
 # ? Set cwd to app

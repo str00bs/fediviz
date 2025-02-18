@@ -2,13 +2,13 @@ kind: pipeline
 name: Build & Push 
 
 steps:
-- name: docker  
+- name: Build & Push
   image: plugins/docker
-  tags:
-  - ${DRONE_TAG}
-  - latest
   settings:
     repo: str00bs/fediviz
+    tags:
+    - ${DRONE_TAG}
+    - latest
     username:
       from_secret: docker_username
     password:
@@ -16,6 +16,7 @@ steps:
   when:
     event:
     - tag
+
 trigger:
   event:
   - tag
