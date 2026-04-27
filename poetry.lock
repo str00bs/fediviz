@@ -1571,14 +1571,14 @@ starlette = ["anyio (>=4.0.0)", "itsdangerous (>=2.1.2)", "python-multipart (>=0
 
 [[package]]
 name = "streamlit-extras"
-version = "1.4.1"
+version = "1.5.0"
 description = "A community-driven collection of useful Streamlit components and utilities that extend Streamlit's functionality."
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "streamlit_extras-1.4.1-py3-none-any.whl", hash = "sha256:6ccdfaacf118a97afe35505d1bcf1b04b1a93253b628e5a82ec02fe58b0f3433"},
-    {file = "streamlit_extras-1.4.1.tar.gz", hash = "sha256:d180fa900dd2e55b68a000e9c032b09102e70531dbf19952b10427a11e359a4e"},
+    {file = "streamlit_extras-1.5.0-py3-none-any.whl", hash = "sha256:1879ac1f5b4e65dbd8fed332b4a5248acaa482c0427d4cbb50848bdf39cec0c2"},
+    {file = "streamlit_extras-1.5.0.tar.gz", hash = "sha256:6647ceeeda580cbc0d0d1515e46ad9b03dc59ff19871876949bf9616ded9f5a0"},
 ]
 
 [package.dependencies]
@@ -1737,4 +1737,4 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "b056997762530fa57fe30e4a2e3e67d03ae4be950a778fbee8ed92e26495b692"
+content-hash = "06a442f7fa51f4ac6d9d0ff4cafdfc53610fa866abfb96339f4fb43f40dd5838"
